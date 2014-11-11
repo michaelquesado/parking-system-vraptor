@@ -5,12 +5,10 @@ import java.util.Calendar;
 import br.fjn.edu.parkingsys.connection.Connection;
 import br.fjn.edu.parkingsys.dao.OperationDAO;
 import br.fjn.edu.parkingsys.dao.ServiceDAO;
-import br.fjn.edu.parkingsys.dao.VehicleDAO;
 import br.fjn.edu.parkingsys.model.Customer;
 import br.fjn.edu.parkingsys.model.Level;
 import br.fjn.edu.parkingsys.model.Operation;
 import br.fjn.edu.parkingsys.model.Service;
-import br.fjn.edu.parkingsys.model.Type;
 import br.fjn.edu.parkingsys.model.User;
 import br.fjn.edu.parkingsys.model.Vehicle;
 
@@ -39,10 +37,13 @@ public class Main {
 		service.setEntry(Calendar.getInstance());
 		service.setUser(user);
 		service.setStay(null);
-
+		
+		ServiceDAO dao = new ServiceDAO();
+		dao.save(service);
+		
 		Operation operation = new Operation();
-		operation.setType(Type.ENTRY);
-		operation.setDateTime(Calendar.getInstance());
+		operation.setDateEntry(Calendar.getInstance());
+		operation.setDateOut(null);
 
 		OperationDAO operationDAO = new OperationDAO();
 		operationDAO.save(operation);

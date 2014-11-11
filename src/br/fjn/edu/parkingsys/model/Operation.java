@@ -14,10 +14,9 @@ public class Operation {
 	@JoinColumn
 	private Service service;
 
-	private Calendar dateTime;
+	private Calendar dateEntry;
 
-	@Enumerated(EnumType.STRING)
-	private Type type;
+	private Calendar dateOut;
 
 	public Integer getId() {
 		return id;
@@ -35,20 +34,20 @@ public class Operation {
 		this.service = service;
 	}
 
-	public Calendar getDateTime() {
-		return dateTime;
+	public Calendar getDateEntry() {
+		return dateEntry;
 	}
 
-	public void setDateTime(Calendar dateTime) {
-		this.dateTime = dateTime;
+	public void setDateEntry(Calendar dateEntry) {
+		this.dateEntry = dateEntry;
 	}
 
-	public Type getType() {
-		return type;
+	public Calendar getDateOut() {
+		return dateOut;
 	}
 
-	public void setType(Type type) {
-		this.type = type;
+	public void setDateOut(Calendar dateOut) {
+		this.dateOut = dateOut;
 	}
 
 	@Override
@@ -56,10 +55,10 @@ public class Operation {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((dateTime == null) ? 0 : dateTime.hashCode());
+				+ ((dateEntry == null) ? 0 : dateEntry.hashCode());
+		result = prime * result + ((dateOut == null) ? 0 : dateOut.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((service == null) ? 0 : service.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -72,10 +71,15 @@ public class Operation {
 		if (getClass() != obj.getClass())
 			return false;
 		Operation other = (Operation) obj;
-		if (dateTime == null) {
-			if (other.dateTime != null)
+		if (dateEntry == null) {
+			if (other.dateEntry != null)
 				return false;
-		} else if (!dateTime.equals(other.dateTime))
+		} else if (!dateEntry.equals(other.dateEntry))
+			return false;
+		if (dateOut == null) {
+			if (other.dateOut != null)
+				return false;
+		} else if (!dateOut.equals(other.dateOut))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -86,8 +90,6 @@ public class Operation {
 			if (other.service != null)
 				return false;
 		} else if (!service.equals(other.service))
-			return false;
-		if (type != other.type)
 			return false;
 		return true;
 	}
