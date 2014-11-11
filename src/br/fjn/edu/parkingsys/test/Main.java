@@ -27,15 +27,11 @@ public class Main {
 		vehicle.setLicensePlate("aaaa-1111");
 		vehicle.setMark("golg6");
 		vehicle.setModel("vw");
-		
-		
-		
+
 		User user = new User();
 		user.setLevel(Level.EMPLOYEE);
 		user.setUserName("francisco");
 		user.setPassword("123");
-
-		
 
 		Service service = new Service();
 		service.setVehicle(vehicle);
@@ -43,19 +39,14 @@ public class Main {
 		service.setEntry(Calendar.getInstance());
 		service.setUser(user);
 		service.setStay(null);
-		
 
-		ServiceDAO dao = new ServiceDAO();
-		dao.save(service);
-
-		
 		Operation operation = new Operation();
 		operation.setType(Type.ENTRY);
 		operation.setDateTime(Calendar.getInstance());
-		
+
 		OperationDAO operationDAO = new OperationDAO();
 		operationDAO.save(operation);
-		
+
 		Connection.close();
 
 		System.out.println("Salvo com sucesso" + customer.getName());
