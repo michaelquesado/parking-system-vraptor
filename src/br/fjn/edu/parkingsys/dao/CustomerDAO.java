@@ -14,7 +14,16 @@ public class CustomerDAO {
 		manager.getTransaction().commit();
 		manager.clear();
 		manager.close();
-		
 	}
-	
+
+	public void update(Customer customer) {
+		EntityManager manager = Connection.getEntityManager();
+		manager.getTransaction().begin();
+		manager.merge(customer);
+		manager.getTransaction().commit();
+		manager.clear();
+		manager.close();
+
+	}
+
 }
