@@ -22,22 +22,35 @@ public class Operation {
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
 	}
 
 	public Calendar getDateTime() {
 		return dateTime;
 	}
+
 	public void setDateTime(Calendar dateTime) {
 		this.dateTime = dateTime;
 	}
+
 	public Type getType() {
 		return type;
 	}
+
 	public void setType(Type type) {
 		this.type = type;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -45,9 +58,11 @@ public class Operation {
 		result = prime * result
 				+ ((dateTime == null) ? 0 : dateTime.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((service == null) ? 0 : service.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -66,6 +81,11 @@ public class Operation {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (service == null) {
+			if (other.service != null)
+				return false;
+		} else if (!service.equals(other.service))
 			return false;
 		if (type != other.type)
 			return false;
