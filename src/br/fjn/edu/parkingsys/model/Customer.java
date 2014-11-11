@@ -2,6 +2,7 @@ package br.fjn.edu.parkingsys.model;
 
 import javax.persistence.*;
 
+
 @Entity
 public class Customer {
 	@Id
@@ -10,6 +11,7 @@ public class Customer {
 	private String name;
 	@Column(unique = true)
 	private String cpf;
+	
 	
 	public Integer getId() {
 		return id;
@@ -65,6 +67,8 @@ public class Customer {
 		return true;
 	}
 	
+	
+
 	
 	
 	
