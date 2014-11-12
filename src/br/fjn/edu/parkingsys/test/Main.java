@@ -37,7 +37,7 @@ public class Main {
 		ServiceDAO dao = new ServiceDAO();
 		for(Service service : dao.getAllServices()){
 			System.out.println(service.getId());
-			System.out.println(service.getVehicle().getCustomer().getName());
+			System.out.println(service.getVehicle().getLicensePlate());
 		}
 		Connection.close();
 

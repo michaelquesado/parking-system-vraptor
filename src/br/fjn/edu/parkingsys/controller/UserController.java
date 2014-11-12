@@ -3,6 +3,8 @@ package br.fjn.edu.parkingsys.controller;
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
+import br.fjn.edu.parkingsys.anotations.Public;
 import br.fjn.edu.parkingsys.components.UserSession;
 import br.fjn.edu.parkingsys.dao.UserDAO;
 import br.fjn.edu.parkingsys.model.User;
@@ -13,13 +15,14 @@ public class UserController {
 	@Inject
 	private UserSession userSession;
 
-	UserDAO userDAO = new UserDAO();
+	UserDAO userDAO;
 
 	public void newUser(User user) {
+		userDAO = new UserDAO();
 		if (userDAO.UserExists(user)) {
-			// caso j· exista o usu·rio.
-			System.out.println("O nome de usu·rio " + user.getName()
-					+ " j· existe... Tente outro.");
+			// caso j√° exista o usu√°rio.
+			System.out.println("O nome de usu√°rio " + user.getName()
+					+ " j√° existe... Tente outro.");
 		} else {
 			userDAO.insert(user);
 		}
@@ -29,7 +32,7 @@ public class UserController {
 		User loadUser = userDAO.loadUser(user);
 
 		if (loadUser == null) {
-			System.out.println("Usu·rio ou Senha inv·lidos.");
+			System.out.println("Usu√°rio ou Senha inv√°lidos.");
 
 		} else {
 			System.out.println("Bem vindo ao ParkingSys " + user.getUserName()
@@ -40,7 +43,12 @@ public class UserController {
 	}
 
 	public void logoutUser() {
-		System.out.println("Usu·rio desconectado!");
-		userSession.setUser(null);
+		System.out.println("Usu√°rio desconectado!");
+		userSession.logout();
 	}
+	
+	@Public
+	@Get("/login")
+	public void loginForm() {}
+	
 }
