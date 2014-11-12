@@ -7,13 +7,59 @@ import br.fjn.edu.parkingsys.model.User;
 
 public class UserDAO {
 
-	public void save(User user) {
+	public void insert(User user) {
+
 		EntityManager manager = Connection.getEntityManager();
+
 		manager.getTransaction().begin();
-		manager.persist(user);
-		manager.getTransaction().commit();
-		manager.clear();
-		manager.close();
+
+		try {
+			manager.persist(user);
+			manager.getTransaction().commit();
+		} catch (NullPointerException nullPointerException) {
+			manager.getTransaction().rollback();
+		} catch (Exception exception) {
+			manager.getTransaction().rollback();
+		} finally {
+			manager.clear();
+			manager.close();
+		}
+	}
+
+	public void update(User user) {
+
+		EntityManager manager = Connection.getEntityManager();
+
+		manager.getTransaction().begin();
+		try {
+			manager.merge(user);
+			manager.getTransaction().commit();
+		} catch (NullPointerException nullPointerException) {
+			manager.getTransaction().rollback();
+		} catch (Exception exception) {
+			manager.getTransaction().rollback();
+		} finally {
+			manager.clear();
+			manager.close();
+		}
+	}
+
+	public void delete(User user) {
+
+		EntityManager manager = Connection.getEntityManager();
+
+		manager.getTransaction().begin();
+		try {
+			manager.remove(user);
+			manager.getTransaction().commit();
+		} catch (NullPointerException nullPointerException) {
+			manager.getTransaction().rollback();
+		} catch (Exception exception) {
+			manager.getTransaction().rollback();
+		} finally {
+			manager.clear();
+			manager.close();
+		}
 
 	}
 
