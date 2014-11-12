@@ -2,6 +2,8 @@ package br.fjn.edu.parkingsys.dao;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.criterion.Restrictions;
+
 import br.fjn.edu.parkingsys.connection.Connection;
 import br.fjn.edu.parkingsys.model.User;
 
@@ -61,6 +63,20 @@ public class UserDAO {
 			manager.close();
 		}
 
+	}
+
+	public boolean UserExists(User user) {
+		User find = (User) Connection.getSession().createCriteria(User.class)
+				.add(Restrictions.eq("userName", user.getUserName()))
+				.uniqueResult();
+		return find != null;
+	}
+
+	public User loadUser(User user) {
+		return (User) Connection.getSession().createCriteria(User.class)
+				.add(Restrictions.eq("userName", user.getUserName()))
+				.add(Restrictions.eq("password", user.getPassword()))
+				.uniqueResult();
 	}
 
 }
