@@ -13,10 +13,6 @@ public class Vehicle {
 	private String licensePlate;
 	private String color;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn
-	private Customer customer;
-
 	public Integer getId() {
 		return id;
 	}
@@ -57,21 +53,11 @@ public class Vehicle {
 		this.color = color;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result
-				+ ((customer == null) ? 0 : customer.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((licensePlate == null) ? 0 : licensePlate.hashCode());
@@ -93,11 +79,6 @@ public class Vehicle {
 			if (other.color != null)
 				return false;
 		} else if (!color.equals(other.color))
-			return false;
-		if (customer == null) {
-			if (other.customer != null)
-				return false;
-		} else if (!customer.equals(other.customer))
 			return false;
 		if (id == null) {
 			if (other.id != null)
