@@ -11,7 +11,7 @@ import br.fjn.edu.parkingsys.model.Service;
 
 public class ServiceDAO {
 
-	public void save(Service service) {
+	public void insert(Service service) {
 		EntityManager manager = Connection.getEntityManager();
 		manager.getTransaction().begin();
 
@@ -22,9 +22,10 @@ public class ServiceDAO {
 		manager.close();
 
 	}
-	
-	public List<Service> getAllServices(){
-		Criteria criteria = Connection.getSession().createCriteria(Service.class);
+
+	public List<Service> getAllServices() {
+		Criteria criteria = Connection.getSession().createCriteria(
+				Service.class);
 		return criteria.list();
 	}
 

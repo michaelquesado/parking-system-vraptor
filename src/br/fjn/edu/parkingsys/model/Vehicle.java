@@ -4,15 +4,16 @@ import javax.persistence.*;
 
 @Entity
 public class Vehicle {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String model;
 	private String mark;
 	private String licensePlate;
-	
-	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	private String color;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn
 	private Customer customer;
 
@@ -48,6 +49,14 @@ public class Vehicle {
 		this.licensePlate = licensePlate;
 	}
 
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -60,6 +69,7 @@ public class Vehicle {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result
 				+ ((customer == null) ? 0 : customer.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -79,6 +89,11 @@ public class Vehicle {
 		if (getClass() != obj.getClass())
 			return false;
 		Vehicle other = (Vehicle) obj;
+		if (color == null) {
+			if (other.color != null)
+				return false;
+		} else if (!color.equals(other.color))
+			return false;
 		if (customer == null) {
 			if (other.customer != null)
 				return false;
