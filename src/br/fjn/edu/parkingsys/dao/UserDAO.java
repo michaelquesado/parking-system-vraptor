@@ -73,6 +73,7 @@ public class UserDAO {
 	}
 
 	public User loadUser(User user) {
+		System.out.println(user.getUserName());
 		return (User) Connection.getSession().createCriteria(User.class)
 				.add(Restrictions.eq("userName", user.getUserName()))
 				.add(Restrictions.eq("password", user.getPassword()))

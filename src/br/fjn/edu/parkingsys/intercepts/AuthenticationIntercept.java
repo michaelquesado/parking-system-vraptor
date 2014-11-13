@@ -15,38 +15,37 @@ import br.fjn.edu.parkingsys.controller.UserController;
 @Intercepts
 public class AuthenticationIntercept implements Interceptor {
 
-	
 	private UserSession userSession;
 	private Result result;
-			
+
 	@Inject
-    public AuthenticationIntercept(UserSession userSession, Result result) {
+	public AuthenticationIntercept(UserSession userSession, Result result) {
 		super();
 		this.userSession = userSession;
 		this.result = result;
 	}
 
-	// Necessário para o CDI	
-	AuthenticationIntercept(){
-		
+	// Necessário para o CDI
+	AuthenticationIntercept() {
+
 	}
 
 	@Override
 	public boolean accepts(ControllerMethod cm) {
-		return !(cm.getMethod().isAnnotationPresent(Public.class) ||
-	          	  cm.getController().getType().isAnnotationPresent(Public.class));
+		return !(cm.getMethod().isAnnotationPresent(Public.class) || cm
+				.getController().getType().isAnnotationPresent(Public.class));
 	}
 
 	@Override
 	public void intercept(InterceptorStack is, ControllerMethod cm,
 			Object object) throws InterceptionException {
 		System.out.println("oi interceptor intercept");
-		if (userSession.isLogged()){  
-            is.next(cm, object);
+		if (userSession.isLogged()) {
+			is.next(cm, object);
 		} else {
 			result.redirectTo(UserController.class).loginForm();
 		}
-		
+
 	}
 
 }
