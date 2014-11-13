@@ -20,7 +20,6 @@ public class UserController {
 	@Inject
 	private Result result;
 
-	@Inject
 	private UserDAO userDAO;
 
 	@Public
