@@ -7,10 +7,10 @@
 <title>Formulario de Login</title>
 </head>
 <body>
-	<form action="{$linkTo[UserController].loginForm}" method="post">
-		<input type="text" name="User.userName" placeholder="Informe seu Login" />
+	<form action="${pageContext.request.contextPath}/loginUser" method="post">
+		<input type="text" name="user.userName" placeholder="Informe seu Login" />
 		 <br> 
-		 <input type="password" name="User.password" placeholder="Inform sua Senha" />
+		 <input type="password" name="user.password" placeholder="Inform sua Senha" />
 		 <br /> 
 		 <input type="submit" value="Entrar" />
 	</form>

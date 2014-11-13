@@ -8,7 +8,6 @@ import br.fjn.edu.parkingsys.anotations.Public;
 @Controller
 public class IndexController {
 	
-	@Public
 	@Get("/")
 	public void index() {
 		System.out.println("Home Active!");

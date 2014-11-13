@@ -7,7 +7,7 @@
 </head>
 <body>
 	<legend>Página inicial</legend>
-	<form action="<c:url value="/newUserForm"/>" method="get">
+	<form action="{$linkTo[UserController].loginForm}" method="get">
 		<button type="submit">Novo Usuário</button>
 	</form>
 

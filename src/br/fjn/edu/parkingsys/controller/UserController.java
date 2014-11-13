@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.fjn.edu.parkingsys.anotations.Public;
 import br.fjn.edu.parkingsys.components.UserSession;
@@ -12,52 +12,44 @@ import br.fjn.edu.parkingsys.dao.UserDAO;
 import br.fjn.edu.parkingsys.model.User;
 
 @Controller
-@Path("user")
 public class UserController {
 
 	@Inject
 	private UserSession userSession;
-	
-	@Inject
-	Result result;
-	UserDAO userDAO;
 
-	public void newUser(User user) {
-		userDAO = new UserDAO();
-		if (userDAO.UserExists(user)) {
-			// caso já exista o usuário.
-		} else {
-			userDAO.insert(user);
-		}
+	@Inject
+	private Result result;
+
+	@Inject
+	private UserDAO userDAO;
+
+	@Public
+	@Get("loginForm")
+	public void loginForm() {
+
 	}
 
+	@Post("loginUser")
+	@Public
 	public void loginUser(User user) {
-		
-		User loadUser = userDAO.loadUser(user);
 
-		if (loadUser == null) {
+		User userLoad = userDAO.loadUser(user);
+
+		if (userLoad == null) {
 			System.out.println("Usuário ou Senha inválidos.");
+			result.redirectTo(UserController.class).loginForm();
 
 		} else {
-			System.out.println("Bem vindo ao ParkingSys " + user.getUserName()
-					+ " !");
-			userSession.setUser(loadUser);
+			System.out.println("Bem vindo ao ParkingSys "
+					+ userLoad.getUserName() + " !");
+			userSession.setUser(userLoad);
+			result.redirectTo(IndexController.class).index();
 		}
 
 	}
 
 	public void logoutUser() {
-		
 		userSession.logout();
 	}
-	
-	@Public
-	@Get("/login")
-	public void loginForm() {}
-	
-	@Public
-	@Get("/index")
-	public void index(){
-		result.of(this).loginForm();
-	}
+
 }
