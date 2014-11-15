@@ -11,6 +11,10 @@ import br.fjn.edu.parkingsys.model.User;
 @Named("sessionUser")
 public class UserSession implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private User user;
 
 	public User getUser() {

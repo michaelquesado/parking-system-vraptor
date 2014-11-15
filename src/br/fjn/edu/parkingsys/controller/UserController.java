@@ -24,7 +24,7 @@ public class UserController {
 	private  UserDAO userDAO;
 	
 	@Public
-	@Get("loginForm")
+	@Get("login")
 	public void loginForm() {
 
 	}
@@ -44,9 +44,11 @@ public class UserController {
 			
 		}
 	}
-
-	public void logoutUser() {
+	
+	
+	public void logout() {
 		userSession.logout();
+		result.redirectTo(this).loginForm();
 	}
 
 }

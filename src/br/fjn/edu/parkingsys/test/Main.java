@@ -1,16 +1,11 @@
 package br.fjn.edu.parkingsys.test;
 
-import br.fjn.edu.parkingsys.model.Cor;
-import br.fjn.edu.parkingsys.model.User;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		User u = new User();
-		u.setCor(Cor.BRANCO);
-
-		System.out.println(Cor.);
+	
 
 		/*
 		 * Customer customer = new Customer(); customer.setName("Amitay ");

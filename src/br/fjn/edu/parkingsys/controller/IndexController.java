@@ -19,10 +19,10 @@ public class IndexController {
 	@Inject
 	Result result;
 	
-	@Public
+	
 	@Get("/")
 	public void index() {
-		System.out.println("Home Active!");
+		System.out.println("index controller!");
 		User user = userSession.getUser();
 		result.include(user);
 	}
