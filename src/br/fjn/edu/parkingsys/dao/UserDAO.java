@@ -2,6 +2,9 @@ package br.fjn.edu.parkingsys.dao;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import br.fjn.edu.parkingsys.connection.Connection;
@@ -65,19 +68,26 @@ public class UserDAO {
 
 	}
 
-	public boolean UserExists(User user) {
-		User find = (User) Connection.getSession().createCriteria(User.class)
-				.add(Restrictions.eq("userName", user.getUserName()))
-				.uniqueResult();
-		return find != null;
+	public boolean verificaLogin(User user) {
+
+		Session session = Connection.getSession();
+		Criteria criteria = session.createCriteria(User.class);
+		Criterion c1 = Restrictions.eq("userName", user.getUserName());
+		Criterion c2 = Restrictions.eq("password", user.getPassword());
+		criteria.add(Restrictions.and(c1, c2));
+
+		return criteria.uniqueResult() != null;
 	}
 
-	public User loadUser(User user) {
-		System.out.println(user.getUserName());
-		return (User) Connection.getSession().createCriteria(User.class)
-				.add(Restrictions.eq("userName", user.getUserName()))
-				.add(Restrictions.eq("password", user.getPassword()))
-				.uniqueResult();
+	public User getUser(User user) {
+
+		Session session = Connection.getSession();
+		Criteria criteria = session.createCriteria(User.class);
+		Criterion c1 = Restrictions.eq("userName", user.getUserName());
+		Criterion c2 = Restrictions.eq("password", user.getPassword());
+		criteria.add(Restrictions.and(c1, c2));
+
+		return (User) criteria.uniqueResult();
 	}
 
 }

@@ -7,9 +7,9 @@
 </head>
 <body>
 	<legend>Página inicial</legend>
-	<form action="{$linkTo[UserController].loginForm}" method="get">
-		<button type="submit">Novo Usuário</button>
-	</form>
-
+	
+		<a href="${linkTo[UserController].loginForm}">Novo Usuário</a>
+		<p>${user.userName}</p>
+	
 </body>
 </html>

@@ -1,12 +1,16 @@
 package br.fjn.edu.parkingsys.test;
 
-import br.fjn.edu.parkingsys.connection.Connection;
-import br.fjn.edu.parkingsys.dao.ServiceDAO;
-import br.fjn.edu.parkingsys.model.Service;
+import br.fjn.edu.parkingsys.model.Cor;
+import br.fjn.edu.parkingsys.model.User;
 
 public class Main {
 
 	public static void main(String[] args) {
+
+		User u = new User();
+		u.setCor(Cor.BRANCO);
+
+		System.out.println(Cor.);
 
 		/*
 		 * Customer customer = new Customer(); customer.setName("Amitay ");
@@ -32,14 +36,12 @@ public class Main {
 		 * OperationDAO operationDAO = new OperationDAO();
 		 * operationDAO.save(operation); System.out.println("Salvo com sucesso"
 		 * + customer.getName()); System.out .println("Salvo com sucesso" +
-		 * vehicle.getCustomer().getCpf());
+		 * vehicle.getCustomer().getCpf()); ServiceDAO dao = new ServiceDAO();
+		 * for(Service service : dao.getAllServices()){
+		 * System.out.println(service.getId());
+		 * System.out.println(service.getVehicle().getLicensePlate()); }
+		 * Connection.close();
 		 */
-		ServiceDAO dao = new ServiceDAO();
-		for(Service service : dao.getAllServices()){
-			System.out.println(service.getId());
-			System.out.println(service.getVehicle().getLicensePlate());
-		}
-		Connection.close();
 
 	}
 }

@@ -20,6 +20,18 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Level level;
 	private String name;
+	
+	@Enumerated(EnumType.STRING)
+	private Cor cor;
+	
+	
+	public Cor getCor() {
+		return cor;
+	}
+
+	public void setCor(Cor cor) {
+		this.cor = cor;
+	}
 
 	public Integer getId() {
 		return id;

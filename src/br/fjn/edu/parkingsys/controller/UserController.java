@@ -19,9 +19,10 @@ public class UserController {
 
 	@Inject
 	private Result result;
-
-	private UserDAO userDAO;
-
+	
+	@Inject
+	private  UserDAO userDAO;
+	
 	@Public
 	@Get("loginForm")
 	public void loginForm() {
@@ -32,19 +33,16 @@ public class UserController {
 	@Public
 	public void loginUser(User user) {
 
-		User userLoad = userDAO.loadUser(user);
-
-		if (userLoad == null) {
-			System.out.println("Usuário ou Senha inválidos.");
-			result.redirectTo(UserController.class).loginForm();
-
-		} else {
-			System.out.println("Bem vindo ao ParkingSys "
-					+ userLoad.getUserName() + " !");
-			userSession.setUser(userLoad);
+		if (userDAO.verificaLogin(user)) {
+			
+			userSession.setUser(userDAO.getUser(user));
 			result.redirectTo(IndexController.class).index();
+			
+		} else {
+			
+			result.redirectTo(UserController.class).loginForm();
+			
 		}
-
 	}
 
 	public void logoutUser() {
