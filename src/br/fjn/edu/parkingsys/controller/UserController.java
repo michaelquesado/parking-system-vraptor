@@ -9,6 +9,7 @@ import br.com.caelum.vraptor.Result;
 import br.fjn.edu.parkingsys.anotations.Public;
 import br.fjn.edu.parkingsys.components.UserSession;
 import br.fjn.edu.parkingsys.dao.UserDAO;
+import br.fjn.edu.parkingsys.model.Level;
 import br.fjn.edu.parkingsys.model.User;
 
 @Controller
@@ -26,7 +27,7 @@ public class UserController {
 	@Public
 	@Get("login")
 	public void loginForm() {
-
+		result.include("title", "Parking System");
 	}
 
 	@Post("loginUser")
@@ -49,6 +50,25 @@ public class UserController {
 	public void logout() {
 		userSession.logout();
 		result.redirectTo(this).loginForm();
+	}
+	
+	@Get("add")
+	public void formAdd(){
+		result.include("title", "New Users");
+	}
+	
+	
+	public void add(User user){
+		result.include("title", "New Users");
+		
+		if(userSession.getUser().getLevel() == Level.MANAGER){
+			userDAO.insert(user);
+			result.redirectTo(IndexController.class).index();
+		}else{
+			result.include("alert", "alert-danger");
+			result.include("flash", "You dont have permission to access this page!");
+			result.redirectTo(IndexController.class).index();
+		}
 	}
 
 }
