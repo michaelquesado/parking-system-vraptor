@@ -1,11 +1,15 @@
 package br.fjn.edu.parkingsys.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.validator.SimpleMessage;
+import br.com.caelum.vraptor.validator.Validator;
 import br.fjn.edu.parkingsys.anotations.Public;
 import br.fjn.edu.parkingsys.components.UserSession;
 import br.fjn.edu.parkingsys.dao.UserDAO;
@@ -20,55 +24,56 @@ public class UserController {
 
 	@Inject
 	private Result result;
-	
+
 	@Inject
-	private  UserDAO userDAO;
-	
-	@Public
-	@Get("login")
-	public void loginForm() {
-		result.include("title", "Parking System");
+	private Validator validator;
+
+	@Get("userForm")
+	public void userForm() {
+
+		result.include("user", userSession.getUser().getName());
+		result.include("levels", Level.values());
+
 	}
 
-	@Post("loginUser")
-	@Public
-	public void loginUser(User user) {
+	@Get("list")
+	public List<User> listUsers() {
+		result.include("user", userSession.getUser().getName());
+		result.include("levels", Level.values());
+		UserDAO dao = new UserDAO();
+		return dao.listAllUsers();
 
-		if (userDAO.verificaLogin(user)) {
-			
-			userSession.setUser(userDAO.getUser(user));
-			result.redirectTo(IndexController.class).index();
-			
+	}
+
+	@Get("delete")
+	public void deleteUser(Integer id) {
+		result.include("user", userSession.getUser().getName());
+		result.include("levels", Level.values());
+		UserDAO dao = new UserDAO();
+		User user = dao.load(id);
+		dao.delete(user);
+		result.redirectTo(UserController.class).listUsers();
+
+	}
+
+	@Post("new")
+	public void newUser(User user) {
+
+		UserDAO dao = new UserDAO();
+
+		if (dao.UserExists(user)) {
+			validator.add(new SimpleMessage("user", "Usuário já existe!"));
+			validator.onErrorRedirectTo(this).userForm();
 		} else {
-			
-			result.redirectTo(UserController.class).loginForm();
-			
+			dao.insert(user);
+			result.redirectTo(UserController.class).listUsers();
 		}
+
 	}
-	
-	
-	public void logout() {
+
+	public void logoutUser() {
 		userSession.logout();
-		result.redirectTo(this).loginForm();
-	}
-	
-	@Get("add")
-	public void formAdd(){
-		result.include("title", "New Users");
-	}
-	
-	
-	public void add(User user){
-		result.include("title", "New Users");
-		
-		if(userSession.getUser().getLevel() == Level.MANAGER){
-			userDAO.insert(user);
-			result.redirectTo(IndexController.class).index();
-		}else{
-			result.include("alert", "alert-danger");
-			result.include("flash", "You dont have permission to access this page!");
-			result.redirectTo(IndexController.class).index();
-		}
+		result.redirectTo(LoginController.class).loginForm();
 	}
 
 }

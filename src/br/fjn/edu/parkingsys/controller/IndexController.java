@@ -24,6 +24,6 @@ public class IndexController {
 	public void index() {
 		System.out.println("index controller!");
 		User user = userSession.getUser();
-		result.include(user);
+		result.include("user", userSession.getUser().getName());
 	}
 }

@@ -15,7 +15,7 @@ public class ServiceDAO {
 		EntityManager manager = Connection.getEntityManager();
 		manager.getTransaction().begin();
 
-		manager.persist(service);
+		manager.merge(service);
 
 		manager.getTransaction().commit();
 		manager.clear();
@@ -23,7 +23,7 @@ public class ServiceDAO {
 
 	}
 
-	public List<Service> getAllServices() {
+	public List<Service> ListServices() {
 		Criteria criteria = Connection.getSession().createCriteria(
 				Service.class);
 		return criteria.list();
