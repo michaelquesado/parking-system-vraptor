@@ -39,9 +39,6 @@ public class AuthenticationIntercept implements Interceptor {
 	@Override
 	public void intercept(InterceptorStack is, ControllerMethod cm,
 			Object object) throws InterceptionException {
-		
-		System.out.println("usuario n esta logado");
-		
 		if (userSession.isLogged()) {
 			is.next(cm, object);
 		} else {
