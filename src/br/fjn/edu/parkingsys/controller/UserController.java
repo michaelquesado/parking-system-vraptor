@@ -52,9 +52,12 @@ public class UserController {
 		result.redirectTo(this).loginForm();
 	}
 	
-	@Get("add")
+	@Get("formAdd")
 	public void formAdd(){
 		result.include("title", "New Users");
+		result.include(userSession.getUser());
+		result.include("levels",Level.values());
+		
 	}
 	
 	
