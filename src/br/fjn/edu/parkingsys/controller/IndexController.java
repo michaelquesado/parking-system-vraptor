@@ -23,6 +23,6 @@ public class IndexController {
 	@Get("/")
 	public void index() {
 		User user = userSession.getUser();
-		result.include(user);
+		result.include("user", userSession.getUser().getName());
 	}
 }
