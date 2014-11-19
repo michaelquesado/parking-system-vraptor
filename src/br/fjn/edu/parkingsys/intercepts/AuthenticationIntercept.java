@@ -44,6 +44,7 @@ public class AuthenticationIntercept implements Interceptor {
 			is.next(cm, object);
 		} else {
 			result.redirectTo(LoginController.class).loginForm();
+			
 		}
 
 	}

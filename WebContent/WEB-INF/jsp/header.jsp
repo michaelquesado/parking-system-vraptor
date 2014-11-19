@@ -47,7 +47,7 @@
 											Service <b class="caret"></b>
 									</a>
 										<ul class="dropdown-menu">
-											<li><a href="${linkTo[ServiceController].newService }">new Service</a></li>
+											<li><a href="${linkTo[ServiceController].index }">new Service</a></li>
 											<li><a href="#">All Services</a></li>
 										</ul></li>
 								</ul>

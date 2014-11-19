@@ -42,12 +42,12 @@
 			<div class="form-group">
 				<div class="col-md-6">
 					<label for="inputuserName" class="col-sm-2 control-label">Amount</label>
-					<input type="text" name="service.amount" placeholder="Amount"
+					<input type="number" name="service.amount" placeholder="Amount"
 						required class="form-control" />
 				</div>
 				<div class="col-md-6">
 					<label for="inputuserName" class="col-sm-2 control-label">Stay</label>
-					<input type="text" name="service.stay" placeholder="Stay" required
+					<input type="number" name="service.stay" placeholder="Stay" required
 						class="form-control" />
 				</div>
 			</div>

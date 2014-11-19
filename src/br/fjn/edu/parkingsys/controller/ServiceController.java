@@ -35,12 +35,12 @@ public class ServiceController {
 
 	@Post("newService")
 	public void newService(Service service) {
-		if (userSession.isLogged()) {
+		
 		System.out.println(service.getAmount());
 		System.out.println(service.getVehicle().getLicensePlate());
-		}else{
-			validator.onErrorUsePageOf(this).index();
-		}
+		
+			
+		
 		/*User user = userSession.getUser();
 		ServiceDAO serviceDAO = new ServiceDAO();
 
