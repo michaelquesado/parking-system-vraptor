@@ -2,6 +2,8 @@ package br.fjn.edu.parkingsys.dao;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.criterion.Restrictions;
+
 import br.fjn.edu.parkingsys.connection.Connection;
 import br.fjn.edu.parkingsys.model.Vehicle;
 
