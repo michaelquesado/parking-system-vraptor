@@ -18,17 +18,28 @@ import br.fjn.edu.parkingsys.model.User;
 @Path("user")
 public class UserController {
 
-	@Inject
 	private UserSession userSession;
 
-	@Inject
 	private Result result;
 
-	@Inject
 	private Validator validator;
 
-	@Inject
 	private UserDAO dao;
+
+	@Inject
+	public UserController(UserSession userSession, Result result,
+			Validator validator, UserDAO dao) {
+		this.userSession = userSession;
+		this.result = result;
+		this.validator = validator;
+		this.dao = dao;
+	}
+
+	/**
+	 * @deprecated para o CDI
+	 */
+	UserController() {
+	}
 
 	@Get("userForm")
 	public void userForm() {
