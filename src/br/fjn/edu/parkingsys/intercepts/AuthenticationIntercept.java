@@ -11,6 +11,10 @@ import br.com.caelum.vraptor.interceptor.Interceptor;
 import br.fjn.edu.parkingsys.anotations.Public;
 import br.fjn.edu.parkingsys.components.UserSession;
 import br.fjn.edu.parkingsys.controller.LoginController;
+<<<<<<< HEAD
+=======
+import br.fjn.edu.parkingsys.controller.UserController;
+>>>>>>> 2a4b698756b2eda4da2249ec2526f40cda934abf
 
 @Intercepts
 public class AuthenticationIntercept implements Interceptor {
@@ -39,6 +43,10 @@ public class AuthenticationIntercept implements Interceptor {
 	@Override
 	public void intercept(InterceptorStack is, ControllerMethod cm,
 			Object object) throws InterceptionException {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2a4b698756b2eda4da2249ec2526f40cda934abf
 		if (userSession.isLogged()) {
 			is.next(cm, object);
 		} else {
