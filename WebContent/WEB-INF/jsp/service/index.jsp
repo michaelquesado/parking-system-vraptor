@@ -4,7 +4,7 @@
 	<h3>You can trust us, your car.</h3>
 </div>
 <div class="row">
-	<form action="${linkTo[ServiceController].search }" method="post"
+	<form action="${linkTo[ServiceController].newService }" method="post"
 		role="form" class="form-horizontal">
 		<div class="col-md-8 col-lg-8 well">
 
@@ -31,7 +31,7 @@
 				</div>
 				<div class="col-md-4">
 					<label for="inputuserName" class="col-sm-2 control-label">Color</label>
-					<input type="text" name="service.vehicle.mark"
+					<input type="text" name="service.vehicle.color"
 						value="${service.vehicle.color }" placeholder="color" required
 						class="form-control" />
 				</div>
