@@ -70,7 +70,7 @@ public class UserDAO {
 
 	}
 
-	public User load(Integer id) {
+	public User getUserById(Integer id) {
 		return (User) Connection.getSession().load(User.class, id);
 
 	}

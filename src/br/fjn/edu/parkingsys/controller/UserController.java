@@ -26,7 +26,7 @@ public class UserController {
 	private Validator validator;
 
 	@Inject
-	UserDAO dao;
+	private UserDAO dao;
 
 	@Get("userForm")
 	public void userForm() {
@@ -43,14 +43,12 @@ public class UserController {
 				.include("user", userSession.getUser());
 	}
 
-	@Get("delete")
-	public void deleteUser(Integer id) {
-		result.include("user", userSession.getUser().getName());
-		result.include("levels", Level.values());
-
-		User user = dao.load(id);
-		dao.delete(user);
-		result.redirectTo(UserController.class).listUsers();
+	@Get("delete/{id}")
+	public void delete(Integer id) {
+		UserDAO uDao = new UserDAO();
+		uDao.delete(uDao.getUserById(id));
+		System.out.println("deletado");
+		result.redirectTo(this).listUsers();
 
 	}
 
@@ -67,7 +65,7 @@ public class UserController {
 			validator.onErrorRedirectTo(this).userForm();
 		} else {
 			dao.insert(user);
-			result.redirectTo(UserController.class).listUsers();
+			result.redirectTo(this).listUsers();
 		}
 
 	}
