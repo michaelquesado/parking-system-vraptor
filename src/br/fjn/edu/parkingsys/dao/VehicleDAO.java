@@ -14,4 +14,19 @@ public class VehicleDAO {
 		manager.clear();
 		manager.close();
 	}
+	public boolean vehicleExists(String licensePlate) {
+		Vehicle vehiclefind = (Vehicle) Connection.getSession()
+				.createCriteria(Vehicle.class)
+				.add(Restrictions.eq("licensePlate", licensePlate))
+				.uniqueResult();
+		return vehiclefind != null;
+	}
+
+	public Vehicle getVehicle(String licensePlate) {
+
+		return (Vehicle) Connection.getSession().createCriteria(Vehicle.class)
+				.add(Restrictions.eq("licensePlate", licensePlate))
+				.uniqueResult();
+
+	}
 }
