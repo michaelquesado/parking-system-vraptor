@@ -61,15 +61,15 @@
 
 					</ul>
 
-					<c:if test="${user != null}">
+					<c:if test="${user != null }">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown"><a class="dropdown-toggle"
 								data-toggle="dropdown" href="#" aria-expanded="true">
-									${user.userName} <b class="caret"></b>
+									${user.name }<b class="caret"></b>
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="${linkTo[UserController].logout}">Logout</a></li>
-									<li><a href="${linkTo[UserController].add}">New User</a></li>
+									<li><a href="${linkTo[LoginController].logout}">Logout</a></li>
+									<li><a href="${linkTo[UserController].userForm}">New User</a></li>
 								</ul></li>
 						</ul>
 					</c:if>
@@ -83,6 +83,7 @@
 			<div class="col-md-5 col-md-offset-3">
 				<div id="message-system" class="alert alert-dismissable ${alert}">
 					<p>${flash}</p>
+					
 				</div>
 			</div>
 		</div>

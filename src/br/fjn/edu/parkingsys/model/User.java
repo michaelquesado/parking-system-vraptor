@@ -17,7 +17,7 @@ public class User {
 	private String userName;
 	private String password;
 
-	@Enumerated(EnumType.STRING)
+	@Enumerated( value =  EnumType.STRING)
 	private Level level;
 	private String name;
 

@@ -1,4 +1,4 @@
-<%@include file="../header.jsp"%>
+<jsp:include page="../header.jsp"></jsp:include>
 <div id="form">
 	<div class="row">
 		<div class="col-md-5 col-md-offset-3">
@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-md-5 col-md-offset-3 well">
 			<form class="form-signin" role="form"
-				action="${linkTo[UserController].loginUser}" method="post">
+				action="${linkTo[LoginController].loginUser}" method="post">
 				<div class="form-group">
 					<label for="inputuserName" class="col-sm-2 control-label">UserName</label>
 					<div class="col-sm-10">
@@ -33,5 +33,5 @@
 		</div>
 	</div>
 </div>
-<%@include file="../footer.jsp"%>
+<jsp:include page="../footer.jsp"></jsp:include>
 

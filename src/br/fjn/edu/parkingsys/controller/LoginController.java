@@ -2,6 +2,7 @@ package br.fjn.edu.parkingsys.controller;
 
 import javax.inject.Inject;
 
+import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
@@ -12,6 +13,7 @@ import br.fjn.edu.parkingsys.components.UserSession;
 import br.fjn.edu.parkingsys.dao.UserDAO;
 import br.fjn.edu.parkingsys.model.User;
 
+@Controller
 public class LoginController {
 	@Inject
 	private UserSession userSession;
@@ -34,16 +36,22 @@ public class LoginController {
 
 		UserDAO dao = new UserDAO();
 
-		if (dao.loadUser(user)) {
+		if (dao.AuthenticationUser(user)) {
 
 			userSession.setUser(dao.getUser(user));
 			result.redirectTo(IndexController.class).index();
 
 		} else {
 			validator.add(new SimpleMessage("login",
-					"Usu·rio ou Senha inv·lidos!"));
+					"Usu√°rio ou Senha inv√°lidos!"));
 			validator.onErrorRedirectTo(this).loginForm();
 		}
 
 	}
+	
+	public void logout() {
+		userSession.logout();
+		result.redirectTo(this).loginForm();
+	}
+	
 }

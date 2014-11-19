@@ -1,9 +1,9 @@
 package br.fjn.edu.parkingsys.model;
 
 public enum Level {
-	EMPLOYEE("EMPLOYEE"),MANAGER("MANAGER");
+	EMPLOYEE("EMPREGADO"),MANAGER("GERENTE");
 	
-	String level;
+	public String level;
 	
 	Level(String level){
 		this.level = level;
@@ -12,4 +12,6 @@ public enum Level {
 	public String getLevel(){
 		return this.level;
 	}
+	
+	
 }

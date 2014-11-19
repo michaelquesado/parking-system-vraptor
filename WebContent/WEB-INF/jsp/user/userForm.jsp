@@ -34,8 +34,8 @@
 			
 			<div class="form-group">
 				<div class="col-md-6">
-					<c:if test="${user.level == MANAGER}">
-						<select class="form-control">
+					<c:if test="${user.level == 'MANAGER'}">
+						<select class="form-control" name="user.level">
 							<option>Select type</option>
 							<c:forEach items="${levels}" var="l">
 								<option value="${l}">${l.level}</option>

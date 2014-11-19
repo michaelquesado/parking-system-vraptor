@@ -44,7 +44,7 @@ public class ServiceController {
 			service.setVehicle(vehicle);
 			service.setUser(user);
 			validator.add(new SimpleMessage("salvo",
-					"Operação salva com sucesso!"));
+					"OperaÃ§Ã£o salva com sucesso!"));
 			serviceDAO.insert(service);
 			result.redirectTo(IndexController.class).index();
 		} else {

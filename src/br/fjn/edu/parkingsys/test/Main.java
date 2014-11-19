@@ -1,11 +1,12 @@
 package br.fjn.edu.parkingsys.test;
 
+import br.fjn.edu.parkingsys.dao.UserDAO;
+import br.fjn.edu.parkingsys.model.User;
+
 
 public class Main {
 
 	public static void main(String[] args) {
-
-	
 
 		/*
 		 * Customer customer = new Customer(); customer.setName("Amitay ");
@@ -37,6 +38,8 @@ public class Main {
 		 * System.out.println(service.getVehicle().getLicensePlate()); }
 		 * Connection.close();
 		 */
+		
+		
 
 	}
 }

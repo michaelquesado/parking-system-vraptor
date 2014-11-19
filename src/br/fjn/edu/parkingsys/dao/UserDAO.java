@@ -82,7 +82,7 @@ public class UserDAO {
 		return find != null;
 	}
 
-	public boolean loadUser(User user) {
+	public boolean AuthenticationUser(User user) {
 
 		Session session = Connection.getSession();
 		Criteria criteria = session.createCriteria(User.class);
