@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
@@ -14,6 +15,7 @@ import br.fjn.edu.parkingsys.model.Level;
 import br.fjn.edu.parkingsys.model.User;
 
 @Controller
+@Path("user")
 public class UserController {
 
 	@Inject
@@ -44,10 +46,8 @@ public class UserController {
 	}
 
 	@Get("delete/{id}")
-	public void delete(Integer id) {
-		UserDAO uDao = new UserDAO();
-		uDao.delete(uDao.getUserById(id));
-		System.out.println("deletado");
+	public void delete(int id) {
+		dao.delete(id);
 		result.redirectTo(this).listUsers();
 
 	}

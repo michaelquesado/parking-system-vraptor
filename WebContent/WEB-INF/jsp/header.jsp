@@ -69,7 +69,10 @@
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="${linkTo[LoginController].logout}">Logout</a></li>
-									<li><a href="${linkTo[UserController].userForm}">New User</a></li>
+									<c:if test="${user.level == 'MANAGER' }">
+											<li><a href="${linkTo[UserController].userForm}">New User</a></li>
+											<li><a href="${linkTo[UserController].listUsers}">All Users</a></li>
+									</c:if>
 								</ul></li>
 						</ul>
 					</c:if>
@@ -83,7 +86,7 @@
 			<div class="col-md-5 col-md-offset-3">
 				<div id="message-system" class="alert alert-dismissable ${alert}">
 					<p>${flash}</p>
-					
+
 				</div>
 			</div>
 		</div>

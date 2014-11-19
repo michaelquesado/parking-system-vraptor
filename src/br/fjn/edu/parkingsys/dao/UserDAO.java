@@ -51,14 +51,16 @@ public class UserDAO {
 		}
 	}
 
-	public void delete(User user) {
+	public void delete(int id) {
 
 		EntityManager manager = Connection.getEntityManager();
-
+		
 		manager.getTransaction().begin();
 		try {
+			User user = manager.find(User.class, id);
 			manager.remove(user);
 			manager.getTransaction().commit();
+			System.out.println("passou na dao e pelo commit");
 		} catch (NullPointerException nullPointerException) {
 			manager.getTransaction().rollback();
 		} catch (Exception exception) {
@@ -67,11 +69,6 @@ public class UserDAO {
 			manager.clear();
 			manager.close();
 		}
-
-	}
-
-	public User getUserById(Integer id) {
-		return (User) Connection.getSession().load(User.class, id);
 
 	}
 
