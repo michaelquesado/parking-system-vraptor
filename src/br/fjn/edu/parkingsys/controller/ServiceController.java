@@ -8,8 +8,10 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.caelum.vraptor.view.Results;
 import br.fjn.edu.parkingsys.components.UserSession;
 import br.fjn.edu.parkingsys.model.Service;
+import br.fjn.edu.parkingsys.model.Vehicle;
 
 @Controller
 @Path("service")
@@ -58,8 +60,14 @@ public class ServiceController {
 		}*/
 
 	}
-	@Post
-	public void search(){} 
+	
+	@Get("search")
+	public void search(String licensePlate){
+		
+		//result.use(Results.json()).from(Vehicle.class).serialize();
+		System.out.println(licensePlate);
+		
+	} 
 	
 	
 

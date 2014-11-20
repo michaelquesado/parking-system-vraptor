@@ -14,7 +14,7 @@
 					<label for="inputuserName" class="col-sm-0 control-label">Search
 						for a car by LicensePlate</label> <input type="text"
 						name="service.vehicle.licensePlate" placeholder="licencePlate."
-						required class="form-control" />
+						required class="form-control" id="licensePlate" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -62,5 +62,6 @@
 
 	</form>
 </div>
-
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/searchVehicle.js"></script>
 <jsp:include page="../footer.jsp"></jsp:include>
