@@ -10,29 +10,36 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.caelum.vraptor.view.Results;
 import br.fjn.edu.parkingsys.components.UserSession;
 import br.fjn.edu.parkingsys.dao.ServiceDAO;
 import br.fjn.edu.parkingsys.dao.VehicleDAO;
 import br.fjn.edu.parkingsys.model.Service;
-<<<<<<< HEAD
-=======
 import br.fjn.edu.parkingsys.model.User;
->>>>>>> 4ac396715e6ba0e01a6b0b97e62240363266c729
 import br.fjn.edu.parkingsys.model.Vehicle;
 
 @Controller
 @Path("service")
 public class ServiceController {
 
-	@Inject
-	UserSession userSession;
+	private UserSession userSession;
+	private Result result;
+	private Validator validator;
+	private VehicleDAO dao;
 
 	@Inject
-	Result result;
+	public ServiceController(UserSession session, Result result,
+			Validator validator, VehicleDAO dao) {
+		this.userSession = session;
+		this.result = result;
+		this.validator = validator;
+		this.dao = dao;
+	}
 
-	@Inject
-	Validator validator;
+	/**
+	 * @deprecated para o CDI
+	 */
+	ServiceController() {
+	}
 
 	@Get("/")
 	public void index() {
@@ -43,24 +50,20 @@ public class ServiceController {
 		}
 	}
 
-	@Get("search")
 	public void searchVehicle(String licensePlate) {
-
-		VehicleDAO dao = new VehicleDAO();
 
 		if (dao.vehicleExists(licensePlate)) {
 			Vehicle v = dao.getVehicle(licensePlate);
 			result.include(v);
 
 		} else {
-			result.include("notfound", "Veículo não encontrado");
+			result.include("notfound", "Veï¿½culo nï¿½o encontrado");
 		}
 	}
 
 	@Post("newService")
 	public void newService(Service service, Vehicle vehicle) {
 
-		VehicleDAO dao = new VehicleDAO();
 		ServiceDAO serviceDAO = new ServiceDAO();
 		User user = userSession.getUser();
 
@@ -80,22 +83,13 @@ public class ServiceController {
 			System.out.println("cadastra novo");
 		}
 	}
-<<<<<<< HEAD
-	
-	@Get("search")
-	public void search(String licensePlate){
-		
-		//result.use(Results.json()).from(Vehicle.class).serialize();
-		System.out.println(licensePlate);
-		
-	} 
-	
-	
-=======
 
-	@Post
-	public void search() {
+	@Get("search")
+	public void search(String licensePlate) {
+
+		// result.use(Results.json()).from(Vehicle.class).serialize();
+		System.out.println(licensePlate);
+
 	}
->>>>>>> 4ac396715e6ba0e01a6b0b97e62240363266c729
 
 }
