@@ -1,5 +1,7 @@
 package br.fjn.edu.parkingsys.controller;
 
+import java.util.Calendar;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -10,13 +12,19 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
 import br.fjn.edu.parkingsys.components.UserSession;
+import br.fjn.edu.parkingsys.dao.ServiceDAO;
+import br.fjn.edu.parkingsys.dao.VehicleDAO;
 import br.fjn.edu.parkingsys.model.Service;
+<<<<<<< HEAD
+=======
+import br.fjn.edu.parkingsys.model.User;
+>>>>>>> 4ac396715e6ba0e01a6b0b97e62240363266c729
 import br.fjn.edu.parkingsys.model.Vehicle;
 
 @Controller
 @Path("service")
 public class ServiceController {
-	
+
 	@Inject
 	UserSession userSession;
 
@@ -29,37 +37,50 @@ public class ServiceController {
 	@Get("/")
 	public void index() {
 		if (userSession.isLogged()) {
-		result.include("user", userSession.getUser());
-		}else{
+			result.include("user", userSession.getUser());
+		} else {
 			validator.onErrorRedirectTo(LoginController.class).logout();
 		}
 	}
 
-	@Post("newService")
-	public void newService(Service service) {
-		
-		System.out.println(service.getAmount());
-		System.out.println(service.getVehicle().getLicensePlate());
-		
-			
-		
-		/*User user = userSession.getUser();
-		ServiceDAO serviceDAO = new ServiceDAO();
+	@Get("search")
+	public void searchVehicle(String licensePlate) {
 
-		if (userSession.isLogged()) {
-			service.setDateTimeEntry(Calendar.getInstance());
-			service.setVehicle(vehicle);
-			service.setUser(user);
-			validator.add(new SimpleMessage("salvo",
-					"OperaÃ§Ã£o salva com sucesso!"));
-			serviceDAO.insert(service);
-			result.redirectTo(IndexController.class).index();
+		VehicleDAO dao = new VehicleDAO();
+
+		if (dao.vehicleExists(licensePlate)) {
+			Vehicle v = dao.getVehicle(licensePlate);
+			result.include(v);
+
 		} else {
-			validator.onErrorUsePageOf(LoginController.class).logout();
-
-		}*/
-
+			result.include("notfound", "Veículo não encontrado");
+		}
 	}
+
+	@Post("newService")
+	public void newService(Service service, Vehicle vehicle) {
+
+		VehicleDAO dao = new VehicleDAO();
+		ServiceDAO serviceDAO = new ServiceDAO();
+		User user = userSession.getUser();
+
+		if (dao.vehicleExists(vehicle.getLicensePlate())) {
+			Vehicle v = dao.getVehicle(vehicle.getLicensePlate());
+			System.out.println("recupera vehicle e seta em service");
+			service.setUser(user);
+			service.setVehicle(v);
+			service.setDateTimeEntry(Calendar.getInstance());
+			serviceDAO.insert(service);
+			System.out.println("salva o service");
+		} else {
+			System.out.println("desabilita campos para cadastrar novo.");
+			service.setVehicle(vehicle);
+			service.setDateTimeEntry(Calendar.getInstance());
+			serviceDAO.insert(service);
+			System.out.println("cadastra novo");
+		}
+	}
+<<<<<<< HEAD
 	
 	@Get("search")
 	public void search(String licensePlate){
@@ -70,5 +91,11 @@ public class ServiceController {
 	} 
 	
 	
+=======
+
+	@Post
+	public void search() {
+	}
+>>>>>>> 4ac396715e6ba0e01a6b0b97e62240363266c729
 
 }
