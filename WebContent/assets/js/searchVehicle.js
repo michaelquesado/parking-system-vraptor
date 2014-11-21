@@ -46,4 +46,11 @@ function nadaEncontrado() {
 
 	$("#vehicle_first").addClass("has-error");
 	$("#vehicle_last").addClass("has-error");
+
+	var campos = [ "model", "vehicle_id", "licensePlate", "mark", "color" ];
+	for (var i = 0; i <= campos.length; i++) {
+		console.log(campos[i]);
+		$("#" + campos[i]).prop("disabled", false);
+
+	}
 }
