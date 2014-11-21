@@ -16,6 +16,7 @@ public class VehicleDAO {
 		manager.clear();
 		manager.close();
 	}
+
 	public boolean vehicleExists(String licensePlate) {
 		Vehicle vehiclefind = (Vehicle) Connection.getSession()
 				.createCriteria(Vehicle.class)

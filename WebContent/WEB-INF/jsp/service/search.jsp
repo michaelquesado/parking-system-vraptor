@@ -1,0 +1,1 @@
+{ mark: '${vehicle.mark}' }

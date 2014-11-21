@@ -9,7 +9,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.validator.Validator;
+import br.com.caelum.vraptor.view.Results;
 import br.fjn.edu.parkingsys.components.UserSession;
 import br.fjn.edu.parkingsys.dao.ServiceDAO;
 import br.fjn.edu.parkingsys.dao.VehicleDAO;
@@ -23,16 +23,15 @@ public class ServiceController {
 
 	private UserSession userSession;
 	private Result result;
-	private Validator validator;
-	private VehicleDAO dao;
+	private VehicleDAO daoVehicle;
+	private ServiceDAO daoService;
 
 	@Inject
-	public ServiceController(UserSession session, Result result,
-			Validator validator, VehicleDAO dao) {
+	public ServiceController(UserSession session, Result result, VehicleDAO daoVehicle, ServiceDAO daoSevice) {
 		this.userSession = session;
 		this.result = result;
-		this.validator = validator;
-		this.dao = dao;
+		this.daoVehicle = daoVehicle;
+		this.daoService = daoSevice;
 	}
 
 	/**
@@ -43,43 +42,48 @@ public class ServiceController {
 
 	@Get("/")
 	public void index() {
-		if (userSession.isLogged()) {
-			result.include("user", userSession.getUser());
-		} else {
-			validator.onErrorRedirectTo(LoginController.class).logout();
-		}
+
+		result.include("user", userSession.getUser());
 	}
 
 	public void searchVehicle(String licensePlate) {
 
-		if (dao.vehicleExists(licensePlate)) {
-			Vehicle v = dao.getVehicle(licensePlate);
-			result.include(v);
+		if (daoVehicle.vehicleExists(licensePlate)) {
+			Vehicle v = daoVehicle.getVehicle(licensePlate);
+			// result.include(v);
 
 		} else {
-			result.include("notfound", "Ve�culo n�o encontrado");
+			// result.include("notfound", "Veiculo não encontrado");
 		}
 	}
 
 	@Post("newService")
 	public void newService(Service service, Vehicle vehicle) {
 
-		ServiceDAO serviceDAO = new ServiceDAO();
 		User user = userSession.getUser();
 
-		if (dao.vehicleExists(vehicle.getLicensePlate())) {
-			Vehicle v = dao.getVehicle(vehicle.getLicensePlate());
+		if (daoVehicle.vehicleExists(vehicle.getLicensePlate())) {
+
+			Vehicle v = daoVehicle.getVehicle(vehicle.getLicensePlate());
+
 			System.out.println("recupera vehicle e seta em service");
-			service.setUser(user);
+
+			// service.setUser(user);
 			service.setVehicle(v);
 			service.setDateTimeEntry(Calendar.getInstance());
-			serviceDAO.insert(service);
+			daoService.insert(service);
+
 			System.out.println("salva o service");
+
 		} else {
+
 			System.out.println("desabilita campos para cadastrar novo.");
+
 			service.setVehicle(vehicle);
 			service.setDateTimeEntry(Calendar.getInstance());
-			serviceDAO.insert(service);
+
+			daoService.insert(service);
+
 			System.out.println("cadastra novo");
 		}
 	}
@@ -87,8 +91,11 @@ public class ServiceController {
 	@Get("search")
 	public void search(String licensePlate) {
 
-		// result.use(Results.json()).from(Vehicle.class).serialize();
-		System.out.println(licensePlate);
+		if (daoVehicle.vehicleExists(licensePlate)) {
+			
+			result.use(Results.json()).from(daoVehicle.getVehicle(licensePlate), "vehicle").serialize();
+			
+		}
 
 	}
 
