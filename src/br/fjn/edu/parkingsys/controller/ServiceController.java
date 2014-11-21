@@ -42,19 +42,8 @@ public class ServiceController {
 
 	@Get("/")
 	public void index() {
-
+		
 		result.include("user", userSession.getUser());
-	}
-
-	public void searchVehicle(String licensePlate) {
-
-		if (daoVehicle.vehicleExists(licensePlate)) {
-			Vehicle v = daoVehicle.getVehicle(licensePlate);
-			// result.include(v);
-
-		} else {
-			// result.include("notfound", "Veiculo não encontrado");
-		}
 	}
 
 	@Post("newService")
@@ -63,29 +52,22 @@ public class ServiceController {
 		User user = userSession.getUser();
 
 		if (daoVehicle.vehicleExists(vehicle.getLicensePlate())) {
-
 			Vehicle v = daoVehicle.getVehicle(vehicle.getLicensePlate());
-
-			System.out.println("recupera vehicle e seta em service");
-
-			// service.setUser(user);
 			service.setVehicle(v);
-			service.setDateTimeEntry(Calendar.getInstance());
-			daoService.insert(service);
-
-			System.out.println("salva o service");
-
 		} else {
-
-			System.out.println("desabilita campos para cadastrar novo.");
-
 			service.setVehicle(vehicle);
-			service.setDateTimeEntry(Calendar.getInstance());
-
-			daoService.insert(service);
-
-			System.out.println("cadastra novo");
 		}
+		
+		service.setUser(user);
+		service.setDateTimeEntry(Calendar.getInstance());
+		daoService.insert(service);
+		result.redirectTo(this).list();
+
+	}
+
+	@Get("services")
+	public void list() {
+		result.include("services",daoService.ListServices());
 	}
 
 	@Get("search")
@@ -97,6 +79,11 @@ public class ServiceController {
 			
 		}
 
+	}
+	
+	@Get("checkout/{id}")
+	public void checkout(int id){
+		System.out.println(id);
 	}
 
 }

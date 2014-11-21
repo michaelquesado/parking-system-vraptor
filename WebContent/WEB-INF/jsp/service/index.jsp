@@ -13,49 +13,37 @@
 				<div class="col-lg-6 col-md-6 ">
 					<label for="inputuserName" class="col-sm-0 control-label">Search
 						for a car by LicensePlate</label> <input type="text"
-						name="service.vehicle.licensePlate" placeholder="licencePlate."
-						required class="form-control" id="licensePlate" maxlength="7" />
+						name="vehicle.licensePlate" placeholder="licencePlate." required
+						class="form-control" id="licensePlate" maxlength="7" />
 				</div>
 			</div>
 			<div class="form-group" id="vehicle_last">
 				<div class="col-md-4">
 					<label for="inputuserName" class="col-sm-2 control-label">Model</label>
-					<input type="text" name="service.vehicle.model" placeholder="model"
-						value="${service.vehicle.model}" id="model" required class="form-control" />
+					<input type="text" name="vehicle.model" placeholder="model"
+						value="${service.vehicle.model}" id="model" required
+						class="form-control" />
 				</div>
 				<div class="col-md-4">
 					<label for="inputuserName" class="col-sm-2 control-label">Mark</label>
-					<input type="text" name="service.vehicle.mark"
-						value="${service.vehicle.mark }" id="mark" placeholder="mark" required
-						class="form-control" />
+					<input type="text" name="vehicle.mark"
+						value="${service.vehicle.mark }" id="mark" placeholder="mark"
+						required class="form-control" />
 				</div>
 				<div class="col-md-4">
 					<label for="inputuserName" class="col-sm-2 control-label">Color</label>
-					<input type="text" name="service.vehicle.color"
-						value="${service.vehicle.color }" id="color" placeholder="color" required
-						class="form-control" />
+					<input type="text" name="vehicle.color"
+						value="${service.vehicle.color }" id="color" placeholder="color"
+						required class="form-control" />
 				</div>
-				<input type="hidden" id="vehicle_id" value="NULL" > 
+				<input type="hidden" id="vehicle_id" value="NULL">
 			</div>
 			<!-- end vehicle -->
 
-			<!-- service -->
 			<div class="form-group">
-				<div class="col-md-6">
-					<label for="inputuserName" class="col-sm-2 control-label">Amount</label>
-					<input type="number" name="service.amount" placeholder="Amount"
-						required class="form-control" />
-				</div>
-				<div class="col-md-6">
-					<label for="inputuserName" class="col-sm-2 control-label">Stay</label>
-					<input type="number" name="service.stay" placeholder="Stay" required
-						class="form-control" />
-				</div>
-			</div>
-			<!-- end service -->
-			<div class="form-group">
-				<div class="col-sm-offset-6 col-sm-6 " >
-					<input type="submit" value="push" class="btn btn-success pull-right" > 
+				<div class="col-sm-offset-6 col-sm-6 ">
+					<input type="submit" value="push"
+						class="btn btn-success pull-right">
 				</div>
 			</div>
 

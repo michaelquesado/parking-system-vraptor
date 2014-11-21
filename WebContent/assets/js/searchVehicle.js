@@ -53,6 +53,7 @@ function nadaEncontrado() {
 	for (var i = 0; i <= campos.length; i++) {
 		
 		$("#" + campos[i]).prop("disabled", false);
+		$("#" + campos[i]).attr("value", '');
 
 	}
 }
