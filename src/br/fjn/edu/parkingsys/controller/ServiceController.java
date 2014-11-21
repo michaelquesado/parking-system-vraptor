@@ -93,7 +93,7 @@ public class ServiceController {
 
 		if (daoVehicle.vehicleExists(licensePlate)) {
 			
-			result.use(Results.json()).from(daoVehicle.getVehicle(licensePlate), "vehicle").serialize();
+			result.use(Results.json()).withoutRoot().from(daoVehicle.getVehicle(licensePlate)).serialize();
 			
 		}
 

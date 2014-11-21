@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/assets/css/bootstrap.css">
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/jquerygit2.js"></script>
+	src="${pageContext.request.contextPath}/assets/js/jquery.mim.2.1.1.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/js/dropdown.js"></script>
 <script type="text/javascript"
@@ -47,7 +47,8 @@
 											Service <b class="caret"></b>
 									</a>
 										<ul class="dropdown-menu">
-											<li><a href="${linkTo[ServiceController].index }">new Service</a></li>
+											<li><a href="${linkTo[ServiceController].index }">new
+													Service</a></li>
 											<li><a href="#">All Services</a></li>
 										</ul></li>
 								</ul>
@@ -70,8 +71,10 @@
 								<ul class="dropdown-menu">
 									<li><a href="${linkTo[LoginController].logout}">Logout</a></li>
 									<c:if test="${user.level == 'MANAGER' }">
-											<li><a href="${linkTo[UserController].userForm}">New User</a></li>
-											<li><a href="${linkTo[UserController].listUsers}">All Users</a></li>
+										<li><a href="${linkTo[UserController].userForm}">New
+												User</a></li>
+										<li><a href="${linkTo[UserController].listUsers}">All
+												Users</a></li>
 									</c:if>
 								</ul></li>
 						</ul>
