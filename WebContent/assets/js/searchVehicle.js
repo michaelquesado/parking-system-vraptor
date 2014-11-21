@@ -1,4 +1,6 @@
 /**
+ * @author fillipquesado
+ * 
  * 
  */
 
@@ -17,7 +19,7 @@ $("#licensePlate").keyup(function() {
 			},
 			error : function() {
 				nadaEncontrado();
-				console.log("error");
+				
 			},
 		});
 	}
@@ -49,7 +51,7 @@ function nadaEncontrado() {
 
 	var campos = [ "model", "vehicle_id", "licensePlate", "mark", "color" ];
 	for (var i = 0; i <= campos.length; i++) {
-		console.log(campos[i]);
+		
 		$("#" + campos[i]).prop("disabled", false);
 
 	}
