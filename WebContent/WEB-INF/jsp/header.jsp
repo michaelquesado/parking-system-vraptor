@@ -49,7 +49,7 @@
 										<ul class="dropdown-menu">
 											<li><a href="${linkTo[ServiceController].index }">new
 													Service</a></li>
-											<li><a href="#">All Services</a></li>
+											<li><a href="${linkTo[ServiceController].list}">All Services</a></li>
 										</ul></li>
 								</ul>
 								<li><a href="#">About</a></li>
