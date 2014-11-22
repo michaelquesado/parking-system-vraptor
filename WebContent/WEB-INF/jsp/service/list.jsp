@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="../header.jsp"></jsp:include>
 <div class="row">
 	<div class="col-lg-12 col-md-12">
@@ -21,8 +22,8 @@
 				<c:forEach items="${services }" var="s">
 					<tr>
 						<td>${s.vehicle.licensePlate}</td>
-						<td>${s.dateTimeEntry}</td>
-						<td>${s.dateTimeOut}</td>
+						<td><fmt:formatDate value="${s.dateTimeEntry.time}"/></td>
+						<td><fmt:formatDate value="${s.dateTimeOut}" /></td>
 						<td>${s.stay}</td>
 						<td>${s.amount}</td>
 						<td>${s.user.userName}</td>
