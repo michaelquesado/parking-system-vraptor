@@ -1,7 +1,7 @@
 <jsp:include page="../header.jsp"></jsp:include>
 
 <div class="page-header">
-	<h3>You can trust us, your car.</h3>
+	<h3>Register here, vehicles.</h3>
 </div>
 <div class="row">
 	<form action="${linkTo[ServiceController].newService }" method="post"
@@ -21,19 +21,19 @@
 				<div class="col-md-4">
 					<label for="inputuserName" class="col-sm-2 control-label">Model</label>
 					<input type="text" name="vehicle.model" placeholder="model"
-						value="${service.vehicle.model}" id="model" required
+						id="model" required
 						class="form-control" />
 				</div>
 				<div class="col-md-4">
 					<label for="inputuserName" class="col-sm-2 control-label">Mark</label>
 					<input type="text" name="vehicle.mark"
-						value="${service.vehicle.mark }" id="mark" placeholder="mark"
+						 id="mark" placeholder="mark"
 						required class="form-control" />
 				</div>
 				<div class="col-md-4">
 					<label for="inputuserName" class="col-sm-2 control-label">Color</label>
 					<input type="text" name="vehicle.color"
-						value="${service.vehicle.color }" id="color" placeholder="color"
+						 id="color" placeholder="color"
 						required class="form-control" />
 				</div>
 				<input type="hidden" id="vehicle_id" value="NULL">

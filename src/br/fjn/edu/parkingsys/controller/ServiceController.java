@@ -67,6 +67,7 @@ public class ServiceController {
 
 	@Get("services")
 	public void list() {
+		result.include("user", userSession.getUser());
 		result.include("services",daoService.ListServices());
 	}
 
