@@ -1,6 +1,8 @@
 package br.fjn.edu.parkingsys.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -27,7 +29,8 @@ public class ServiceController {
 	private ServiceDAO daoService;
 
 	@Inject
-	public ServiceController(UserSession session, Result result, VehicleDAO daoVehicle, ServiceDAO daoSevice) {
+	public ServiceController(UserSession session, Result result,
+			VehicleDAO daoVehicle, ServiceDAO daoSevice) {
 		this.userSession = session;
 		this.result = result;
 		this.daoVehicle = daoVehicle;
@@ -42,7 +45,7 @@ public class ServiceController {
 
 	@Get("/")
 	public void index() {
-		
+
 		result.include("user", userSession.getUser());
 	}
 
@@ -57,7 +60,7 @@ public class ServiceController {
 		} else {
 			service.setVehicle(vehicle);
 		}
-		
+
 		service.setUser(user);
 		service.setDateTimeEntry(Calendar.getInstance());
 		daoService.insert(service);
@@ -68,23 +71,58 @@ public class ServiceController {
 	@Get("services")
 	public void list() {
 		result.include("user", userSession.getUser());
-		result.include("services",daoService.ListServices());
+		result.include("services", daoService.ListServices());
 	}
 
 	@Get("search")
 	public void search(String licensePlate) {
 
 		if (daoVehicle.vehicleExists(licensePlate)) {
-			
-			result.use(Results.json()).withoutRoot().from(daoVehicle.getVehicle(licensePlate)).serialize();
-			
+
+			result.use(Results.json()).withoutRoot()
+					.from(daoVehicle.getVehicle(licensePlate)).serialize();
+
 		}
 
 	}
-	
+
 	@Get("checkout/{id}")
-	public void checkout(int id){
-		System.out.println(id);
+	public void checkout(int id) {
+		if (daoService.serviceExist(id)) {
+			Service checkOut = daoService.getService(id);
+			checkOut.setDateTimeOut(Calendar.getInstance());
+			
+			
+			
+			System.out.println("=========horas e minutos===========");
+			for(String t : this.Stay(checkOut) ){
+				System.out.println(t);
+			}
+			
+			
+			
+			result.of(this).list();
+		}
+	}
+
+	private String[] Stay(Service service) {
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		long start = service.getDateTimeEntry().getTimeInMillis();
+		long out = service.getDateTimeOut().getTimeInMillis();
+		
+		long time = out - start;
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.HOUR_OF_DAY,0);
+		cal.set(Calendar.MINUTE,0);
+		cal.set(Calendar.SECOND,0);
+		cal.set(Calendar.MILLISECOND,0);
+		
+		cal.add(Calendar.SECOND, Integer.parseInt("" + (time / 1000)));
+		System.out.println(time / 1000);
+		
+		return sdf.format(cal.getTime()).split(":");
+		
 	}
 
 }

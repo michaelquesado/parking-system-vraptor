@@ -22,7 +22,7 @@
 				<c:forEach items="${services }" var="s">
 					<tr>
 						<td>${s.vehicle.licensePlate}</td>
-						<td><fmt:formatDate value="${s.dateTimeEntry.time}"/></td>
+						<td>${s.dateTimeEntry}</td>
 						<td><fmt:formatDate value="${s.dateTimeOut}" /></td>
 						<td>${s.stay}</td>
 						<td>${s.amount}</td>
