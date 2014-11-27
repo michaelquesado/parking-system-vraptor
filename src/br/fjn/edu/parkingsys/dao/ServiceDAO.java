@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.fjn.edu.parkingsys.connection.Connection;
@@ -28,7 +29,7 @@ public class ServiceDAO {
 	public List<Service> ListServices() {
 		Criteria criteria = Connection.getSession().createCriteria(
 				Service.class);
-		return criteria.list();
+		return criteria.addOrder(Order.desc("id")).list();
 	}
 
 	public boolean serviceExist(int id) {
@@ -44,6 +45,19 @@ public class ServiceDAO {
 		
 		return (Service) Connection.getEntityManager().find(Service.class, id);
 		
+	}
+
+	public void update(Service checkOut) {
+		
+		EntityManager manager = Connection.getEntityManager();
+		manager.getTransaction().begin();
+
+		manager.merge(checkOut);
+
+		manager.getTransaction().commit();
+		manager.clear();
+		manager.close();
+
 	}
 
 }
