@@ -11,7 +11,7 @@ $("#licensePlate").keyup(function() {
 			data : {
 				licensePlate : $(this).val()
 			},
-			url : "search",
+			url : "service/search",
 			dataType : 'text',
 			success : function(result) {
 				if (result !== null)

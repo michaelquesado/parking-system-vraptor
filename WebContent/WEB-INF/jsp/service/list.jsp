@@ -3,13 +3,14 @@
 <jsp:include page="../header.jsp"></jsp:include>
 <div class="row">
 	<div class="col-lg-12">
-		<div class="page-header ">
-			<h3>All services.</h3>
-		</div>
+	<jsp:include page="index.jsp" ></jsp:include>
 	</div>
 </div>
 <div class="row">
 	<div class="col-lg-12 col-md-12">
+		<div class="">
+			<h2>All services.</h2>
+		</div>
 		<table
 			class="table table-striped table-bordered  table-condensed table-hover">
 			<thead>

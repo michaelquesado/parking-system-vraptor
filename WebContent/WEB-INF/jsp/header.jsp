@@ -15,6 +15,8 @@
 	src="${pageContext.request.contextPath}/assets/js/dropdown.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/js/transition.js"></script>
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/modal.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/js/collapse.js"></script>
 </head>
