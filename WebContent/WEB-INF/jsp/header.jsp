@@ -15,7 +15,7 @@
 	src="${pageContext.request.contextPath}/assets/js/dropdown.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/js/transition.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/js/modal.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/js/collapse.js"></script>
@@ -49,9 +49,9 @@
 											Service <b class="caret"></b>
 									</a>
 										<ul class="dropdown-menu">
-											<li><a href="${linkTo[ServiceController].index }">new
-													Service</a></li>
-											<li><a href="${linkTo[ServiceController].list}">All Services</a></li>
+
+											<li><a href="${linkTo[ServiceController].list}">All
+													Services</a></li>
 										</ul></li>
 								</ul>
 								<li><a href="#">About</a></li>
@@ -87,11 +87,6 @@
 		</div>
 	</nav>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-5 col-md-offset-3">
-				<div id="message-system" class="alert alert-dismissable ${alert}">
-					<p>${flash}</p>
-
-				</div>
-			</div>
+		<div class="row " id="message-system">
+			<div class="col-md-12"></div>
 		</div>

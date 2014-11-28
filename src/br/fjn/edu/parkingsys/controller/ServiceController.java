@@ -108,9 +108,7 @@ public class ServiceController {
 			
 			daoService.update(checkOut);
 			
-			result.include("user", userSession.getUser());
-			result.include("services", daoService.ListServices());
-			result.of(this).list();
+			result.redirectTo(this).list();
 		}
 	}
 

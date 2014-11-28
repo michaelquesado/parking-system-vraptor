@@ -1,7 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-warning btn-lg" data-toggle="modal"
+<button type="button" class="btn btn-warning btn-lg " data-toggle="modal"
 	data-target="#myModal">Register vehicles</button>
 
 <!-- Modal -->

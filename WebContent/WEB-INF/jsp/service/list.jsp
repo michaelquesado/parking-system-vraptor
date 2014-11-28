@@ -3,7 +3,7 @@
 <jsp:include page="../header.jsp"></jsp:include>
 <div class="row">
 	<div class="col-lg-12">
-	<jsp:include page="index.jsp" ></jsp:include>
+		<jsp:include page="index.jsp"></jsp:include>
 	</div>
 </div>
 <div class="row">
@@ -27,18 +27,33 @@
 			</thead>
 
 			<tbody>
+			
 				<c:forEach items="${services}" var="s">
+					<c:set var="checkout" value=""></c:set>
+					<c:set var="checkout_class" value="success"></c:set>
+					<c:if test="${s.stay gt 0 }">
+						<c:set var="checkout" value="DISABLED"></c:set>
+						<c:set var="checkout_class" value="danger"></c:set>
+					</c:if>
 					<tr>
 						<td>${s.vehicle.licensePlate}</td>
 						<td><fmt:formatDate type="both"
 								value="${s.dateTimeEntry.time}" /></td>
 						<td><fmt:formatDate type="both" value="${s.dateTimeOut.time}" /></td>
 						<td>${s.stay}</td>
-						<td>${s.amount}</td>
+						<td><c:choose>
+								<c:when test="${s.amount eq 0 }">
+									free
+								</c:when>
+								<c:otherwise>
+									<fmt:formatNumber type="number" maxIntegerDigits="2"
+										value="${s.amount}" />
+								</c:otherwise>
+							</c:choose></td>
 						<td>${s.user.userName}</td>
 						<td>${s.user.level}</td>
 						<td><a href="${linkTo[ServiceController].checkout(s.id)}"
-							class="btn btn-primary">CheckOut</a></td>
+							class="btn btn-${checkout_class}" ${checkout}>CheckOut</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
