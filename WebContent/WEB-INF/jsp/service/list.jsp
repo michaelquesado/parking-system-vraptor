@@ -20,8 +20,6 @@
 					<th>Out</th>
 					<th>Stay</th>
 					<th>Amount</th>
-					<th>UserName</th>
-					<th>Level</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -52,8 +50,6 @@
 										value="${s.amount}" />
 								</c:otherwise>
 							</c:choose></td>
-						<td>${s.user.userName}</td>
-						<td>${s.user.level}</td>
 						<td><a href="${linkTo[ServiceController].checkout(s.id)}"
 							class="btn btn-${checkout_class}" ${checkout}>${name_button}</a></td>
 					</tr>

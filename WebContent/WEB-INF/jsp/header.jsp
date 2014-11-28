@@ -41,27 +41,8 @@
 				<div class="nav-collapse navbar-collapse">
 					<ul class="nav navbar-nav ">
 						<li class="active"><a href="#">Home</a></li>
-						<c:choose>
-							<c:when test="${user != null}">
-								<ul class="nav navbar-nav navbar-right">
-									<li class="dropdown"><a class="dropdown-toggle"
-										data-toggle="dropdown" href="#" aria-expanded="true">
-											Service <b class="caret"></b>
-									</a>
-										<ul class="dropdown-menu">
-
-											<li><a href="${linkTo[ServiceController].list}">All
-													Services</a></li>
-										</ul></li>
-								</ul>
-								<li><a href="#">About</a></li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="#">Contact</a></li>
-								<li><a href="#">About</a></li>
-							</c:otherwise>
-						</c:choose>
-
+						<li><a href="#">Contact</a></li>
+						<li><a href="#">About</a></li>
 					</ul>
 
 					<c:if test="${user != null }">
