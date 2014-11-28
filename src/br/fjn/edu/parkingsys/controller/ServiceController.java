@@ -46,7 +46,7 @@ public class ServiceController {
 	public void index() {
 
 		result.include("user", userSession.getUser());
-		
+
 	}
 
 	@Post("newService")
@@ -100,14 +100,14 @@ public class ServiceController {
 			int min = Integer.parseInt(tempo[1]);
 			int tempoTotal = hora + min;
 			checkOut.setStay(tempoTotal);
-			if (tempoTotal > 30) {
-				checkOut.setAmount(tempoTotal * 0.06);
-			} else {
-				checkOut.setAmount(0.0);
-			}
-			
+			double vDef = 3.0;
+			double vStay = tempoTotal * 0.03;
+
+			double totalPrice = vDef + vStay;
+			checkOut.setAmount(totalPrice);
+
 			daoService.update(checkOut);
-			
+
 			result.redirectTo(IndexController.class).index();
 		}
 	}
