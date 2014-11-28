@@ -30,10 +30,12 @@
 			
 				<c:forEach items="${services}" var="s">
 					<c:set var="checkout" value=""></c:set>
+					<c:set var="name_button" value="checkout"></c:set>
 					<c:set var="checkout_class" value="success"></c:set>
-					<c:if test="${s.stay gt 0 }">
+					<c:if test="${s.stay != null }">
 						<c:set var="checkout" value="DISABLED"></c:set>
 						<c:set var="checkout_class" value="danger"></c:set>
+						<c:set var="name_button" value="finished"></c:set>
 					</c:if>
 					<tr>
 						<td>${s.vehicle.licensePlate}</td>
@@ -53,7 +55,7 @@
 						<td>${s.user.userName}</td>
 						<td>${s.user.level}</td>
 						<td><a href="${linkTo[ServiceController].checkout(s.id)}"
-							class="btn btn-${checkout_class}" ${checkout}>CheckOut</a></td>
+							class="btn btn-${checkout_class}" ${checkout}>${name_button}</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

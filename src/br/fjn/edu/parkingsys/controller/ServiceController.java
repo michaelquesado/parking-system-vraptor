@@ -65,7 +65,7 @@ public class ServiceController {
 
 		service.setDateTimeEntry(Calendar.getInstance());
 		daoService.insert(service);
-		result.redirectTo(this).list();
+		result.redirectTo(IndexController.class).index();
 
 	}
 
@@ -108,7 +108,7 @@ public class ServiceController {
 			
 			daoService.update(checkOut);
 			
-			result.redirectTo(this).list();
+			result.redirectTo(IndexController.class).index();
 		}
 	}
 

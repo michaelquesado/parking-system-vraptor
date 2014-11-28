@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-warning btn-lg " data-toggle="modal"
-	data-target="#myModal">Register vehicles</button>
+	data-target="#myModal">Checking</button>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
