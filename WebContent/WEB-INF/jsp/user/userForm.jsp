@@ -70,8 +70,11 @@
 		});
 
 		$("#inputPassword2").blur(function() {
-			if ($(this).val() !== $("#inputPassword1")) {
-				alert("Senhas inconpativeis.");
+			if ($(this).val().length != 0) {
+				if ($(this).val() !== $("#inputPassword1").val()) {
+					alert("Senhas inconpativeis.");
+
+				}
 			}
 		});
 	});
