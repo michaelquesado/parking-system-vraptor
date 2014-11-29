@@ -1,11 +1,14 @@
 package br.fjn.edu.parkingsys.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -27,9 +30,17 @@ public class ServiceDAO {
 	}
 
 	public List<Service> ListServices() {
-		Criteria criteria = Connection.getSession().createCriteria(
-				Service.class);
-		return criteria.addOrder(Order.desc("id")).list();
+		Session session = Connection.getSession();
+		Criteria criteria = session.createCriteria(Service.class);
+		
+		Date data = new Date();  
+		SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Criterion c1 = Restrictions.eq("created", formatador.format(data) );
+		criteria.add(c1);
+
+		criteria.addOrder(Order.desc("id"));
+		return criteria.list();
 	}
 
 	public boolean serviceExist(int id) {
@@ -42,13 +53,13 @@ public class ServiceDAO {
 	}
 
 	public Service getService(int id) {
-		
+
 		return (Service) Connection.getEntityManager().find(Service.class, id);
-		
+
 	}
 
 	public void update(Service checkOut) {
-		
+
 		EntityManager manager = Connection.getEntityManager();
 		manager.getTransaction().begin();
 
@@ -59,5 +70,6 @@ public class ServiceDAO {
 		manager.close();
 
 	}
-
+	
 }
+

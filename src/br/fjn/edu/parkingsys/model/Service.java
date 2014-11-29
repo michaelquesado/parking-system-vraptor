@@ -22,6 +22,7 @@ public class Service {
 	private Integer stay;
 	private Calendar dateTimeEntry;
 	private Calendar dateTimeOut;
+	private String created;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn
@@ -41,6 +42,14 @@ public class Service {
 
 	public Double getAmount() {
 		return amount;
+	}
+
+	public String getCreated() {
+		return created;
+	}
+
+	public void setCreated(String created) {
+		this.created = created;
 	}
 
 	public void setAmount(Double amount) {
@@ -92,6 +101,7 @@ public class Service {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		result = prime * result + ((created == null) ? 0 : created.hashCode());
 		result = prime * result
 				+ ((dateTimeEntry == null) ? 0 : dateTimeEntry.hashCode());
 		result = prime * result
@@ -116,6 +126,11 @@ public class Service {
 			if (other.amount != null)
 				return false;
 		} else if (!amount.equals(other.amount))
+			return false;
+		if (created == null) {
+			if (other.created != null)
+				return false;
+		} else if (!created.equals(other.created))
 			return false;
 		if (dateTimeEntry == null) {
 			if (other.dateTimeEntry != null)

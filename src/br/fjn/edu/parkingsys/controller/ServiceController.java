@@ -2,6 +2,7 @@ package br.fjn.edu.parkingsys.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -60,9 +61,12 @@ public class ServiceController {
 		} else {
 			service.setVehicle(vehicle);
 		}
-
+		
+		Date data = new Date();  
+		SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+		
 		service.setUser(user);
-
+		service.setCreated(formatador.format(data));
 		service.setDateTimeEntry(Calendar.getInstance());
 		daoService.insert(service);
 		result.redirectTo(IndexController.class).index();

@@ -23,7 +23,7 @@
 							<label for="inputuserName" class="col-sm-0 control-label">Search
 								for a car by LicensePlate</label> <input type="text"
 								name="vehicle.licensePlate" placeholder="licencePlate." required
-								class="form-control" id="licensePlate" maxlength="7" />
+								class="form-control" id="licensePlate" maxlength="7" autofocus="autofocus"/>
 						</div>
 					</div>
 					<div class="form-group" id="vehicle_last">
