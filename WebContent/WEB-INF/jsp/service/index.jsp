@@ -14,7 +14,7 @@
 				<h4 class="modal-title" id="myModalLabel">Register here,
 					vehicles</h4>
 			</div>
-			<form action="${linkTo[ServiceController].newService }" method="post"
+			<form action="${linkTo[ServiceController].newService}" method="post"
 				role="form" class="form-horizontal">
 				<div class="modal-body">
 					<!-- form vehicle -->
