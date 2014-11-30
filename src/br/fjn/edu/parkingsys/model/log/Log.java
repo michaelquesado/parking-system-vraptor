@@ -2,20 +2,32 @@ package br.fjn.edu.parkingsys.model.log;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
+import br.fjn.edu.parkingsys.model.Operations;
 import br.fjn.edu.parkingsys.model.User;
 
 public class Log {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn
 	private User user;
 	private String model;
-	private String operation;
 	private Calendar created;
+	
+	@Enumerated(EnumType.STRING)
+	private Operations operation;
 	public Integer getId() {
 		return id;
 	}
@@ -34,17 +46,17 @@ public class Log {
 	public void setModel(String model) {
 		this.model = model;
 	}
-	public String getOperation() {
-		return operation;
-	}
-	public void setOperation(String operation) {
-		this.operation = operation;
-	}
 	public Calendar getCreated() {
 		return created;
 	}
 	public void setCreated(Calendar created) {
 		this.created = created;
+	}
+	public Operations getOperation() {
+		return operation;
+	}
+	public void setOperation(Operations operation) {
+		this.operation = operation;
 	}
 	@Override
 	public int hashCode() {
@@ -82,10 +94,7 @@ public class Log {
 				return false;
 		} else if (!model.equals(other.model))
 			return false;
-		if (operation == null) {
-			if (other.operation != null)
-				return false;
-		} else if (!operation.equals(other.operation))
+		if (operation != other.operation)
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -95,4 +104,5 @@ public class Log {
 		return true;
 	}
 	
+
 }

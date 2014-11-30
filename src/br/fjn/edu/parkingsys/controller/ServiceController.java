@@ -15,6 +15,7 @@ import br.com.caelum.vraptor.view.Results;
 import br.fjn.edu.parkingsys.components.UserSession;
 import br.fjn.edu.parkingsys.dao.ServiceDAO;
 import br.fjn.edu.parkingsys.dao.VehicleDAO;
+import br.fjn.edu.parkingsys.model.Operations;
 import br.fjn.edu.parkingsys.model.Service;
 import br.fjn.edu.parkingsys.model.User;
 import br.fjn.edu.parkingsys.model.Vehicle;
@@ -69,10 +70,13 @@ public class ServiceController {
 		service.setUser(user);
 		service.setCreated(formatador.format(data));
 		service.setDateTimeEntry(Calendar.getInstance());
-		daoService.insert(service);
-		Log log = new Log();
 		
+		daoService.insert(service);
+		
+		Log log = new Log();
+		log.setUser(userSession.getUser());
 		log.setModel("Service");
+		log.setOperation(Operations.CREATE);
 		log.setCreated(Calendar.getInstance());
 		result.redirectTo(IndexController.class).index();
 
