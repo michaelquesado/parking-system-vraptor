@@ -15,5 +15,18 @@
 			<property name="javax.persistence.jdbc.password" value="h4ck3v1m2" />
 		</properties>
 	</persistence-unit>
+	
+	<persistence-unit name="log" >
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/parkingLog" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.user" value="postgres" />
+			<property name="javax.persistence.jdbc.password" value="h4ck3v1m2" />
+		</properties>
+	</persistence-unit>
 
 </persistence>
