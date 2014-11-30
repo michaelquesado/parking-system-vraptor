@@ -18,6 +18,7 @@ import br.fjn.edu.parkingsys.dao.VehicleDAO;
 import br.fjn.edu.parkingsys.model.Service;
 import br.fjn.edu.parkingsys.model.User;
 import br.fjn.edu.parkingsys.model.Vehicle;
+import br.fjn.edu.parkingsys.model.log.Log;
 
 @Controller
 @Path("service")
@@ -69,6 +70,10 @@ public class ServiceController {
 		service.setCreated(formatador.format(data));
 		service.setDateTimeEntry(Calendar.getInstance());
 		daoService.insert(service);
+		Log log = new Log();
+		
+		log.setModel("Service");
+		log.setCreated(Calendar.getInstance());
 		result.redirectTo(IndexController.class).index();
 
 	}

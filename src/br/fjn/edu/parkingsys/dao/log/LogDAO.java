@@ -2,7 +2,7 @@ package br.fjn.edu.parkingsys.dao.log;
 
 import javax.persistence.EntityManager;
 
-import br.fjn.edu.parkingsys.connection.Connection;
+import br.fjn.edu.parkingsys.connection.ConnectionLog;
 import br.fjn.edu.parkingsys.model.log.Log;
 
 public class LogDAO {
@@ -10,7 +10,7 @@ public class LogDAO {
 	
 	public void register(Log log){
 		
-		EntityManager manager = Connection.getEntityManager();
+		EntityManager manager = ConnectionLog.getEntityManager();
 
 		manager.getTransaction().begin();
 
