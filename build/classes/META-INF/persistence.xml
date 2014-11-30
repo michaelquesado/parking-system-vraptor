@@ -2,9 +2,13 @@
 <persistence version="2.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	
+
 	<persistence-unit name="validator">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>br.fjn.edu.parkingsys.model.Service</class>
+		<class>br.fjn.edu.parkingsys.model.User</class>
+		<class>br.fjn.edu.parkingsys.model.Vehicle</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/parking" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
@@ -15,9 +19,11 @@
 			<property name="javax.persistence.jdbc.password" value="h4ck3v1m2" />
 		</properties>
 	</persistence-unit>
-	
-	<persistence-unit name="log" >
+
+	<persistence-unit name="log">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>br.fjn.edu.parkingsys.model.log.Log</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/parkingLog" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

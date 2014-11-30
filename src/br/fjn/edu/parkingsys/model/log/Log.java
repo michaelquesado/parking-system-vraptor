@@ -2,30 +2,23 @@ package br.fjn.edu.parkingsys.model.log;
 
 import java.util.Calendar;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 import br.fjn.edu.parkingsys.model.Operations;
-import br.fjn.edu.parkingsys.model.User;
 
+@Entity
 public class Log {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn
-	private User user;
+	private Integer user_id;
 	private String model;
 	private Calendar created;
-	
 	@Enumerated(EnumType.STRING)
 	private Operations operation;
 	public Integer getId() {
@@ -34,11 +27,12 @@ public class Log {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public User getUser() {
-		return user;
+	
+	public Integer getUser_id() {
+		return user_id;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 	public String getModel() {
 		return model;
@@ -58,6 +52,7 @@ public class Log {
 	public void setOperation(Operations operation) {
 		this.operation = operation;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,7 +62,7 @@ public class Log {
 		result = prime * result + ((model == null) ? 0 : model.hashCode());
 		result = prime * result
 				+ ((operation == null) ? 0 : operation.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((user_id == null) ? 0 : user_id.hashCode());
 		return result;
 	}
 	@Override
@@ -96,10 +91,10 @@ public class Log {
 			return false;
 		if (operation != other.operation)
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (user_id == null) {
+			if (other.user_id != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!user_id.equals(other.user_id))
 			return false;
 		return true;
 	}

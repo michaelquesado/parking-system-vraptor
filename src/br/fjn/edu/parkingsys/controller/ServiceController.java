@@ -15,6 +15,7 @@ import br.com.caelum.vraptor.view.Results;
 import br.fjn.edu.parkingsys.components.UserSession;
 import br.fjn.edu.parkingsys.dao.ServiceDAO;
 import br.fjn.edu.parkingsys.dao.VehicleDAO;
+import br.fjn.edu.parkingsys.dao.log.LogDAO;
 import br.fjn.edu.parkingsys.model.Operations;
 import br.fjn.edu.parkingsys.model.Service;
 import br.fjn.edu.parkingsys.model.User;
@@ -29,14 +30,18 @@ public class ServiceController {
 	private Result result;
 	private VehicleDAO daoVehicle;
 	private ServiceDAO daoService;
+	private Log log;
+	private LogDAO logDAO;
 
 	@Inject
 	public ServiceController(UserSession session, Result result,
-			VehicleDAO daoVehicle, ServiceDAO daoSevice) {
+			VehicleDAO daoVehicle, ServiceDAO daoSevice, Log log, LogDAO logDAO) {
 		this.userSession = session;
 		this.result = result;
 		this.daoVehicle = daoVehicle;
 		this.daoService = daoSevice;
+		this.log = log;
+		this.logDAO = logDAO;
 	}
 
 	/**
@@ -63,27 +68,26 @@ public class ServiceController {
 		} else {
 			service.setVehicle(vehicle);
 		}
-		
-		Date data = new Date();  
+
+		Date data = new Date();
 		SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		service.setUser(user);
 		service.setCreated(formatador.format(data));
 		service.setDateTimeEntry(Calendar.getInstance());
-		
+
 		daoService.insert(service);
+		this.registerLog(Operations.CREATE);
 		
-		Log log = new Log();
-		log.setUser(userSession.getUser());
-		log.setModel("Service");
-		log.setOperation(Operations.CREATE);
-		log.setCreated(Calendar.getInstance());
+
 		result.redirectTo(IndexController.class).index();
 
 	}
 
 	@Get("services")
 	public void list() {
+
+		this.registerLog(Operations.READY);
 		result.include("user", userSession.getUser());
 		result.include("services", daoService.ListServices());
 	}
@@ -93,6 +97,7 @@ public class ServiceController {
 
 		if (daoVehicle.vehicleExists(licensePlate)) {
 
+			this.registerLog(Operations.READY);
 			result.use(Results.json()).withoutRoot()
 					.from(daoVehicle.getVehicle(licensePlate)).serialize();
 
@@ -104,6 +109,8 @@ public class ServiceController {
 	public void checkout(int id) {
 		if (daoService.serviceExist(id)) {
 
+			
+			this.registerLog(Operations.UPDATE);
 			Service checkOut = daoService.getService(id);
 			checkOut.setDateTimeOut(Calendar.getInstance());
 
@@ -143,6 +150,16 @@ public class ServiceController {
 
 		return sdf.format(cal.getTime()).split(":");
 
+	}
+	
+	private void registerLog(Operations operations){
+		
+		log.setUser_id(userSession.getUser().getId());
+		log.setModel("Service");
+		log.setOperation(operations);
+		log.setCreated(Calendar.getInstance());
+		
+		logDAO.register(log);
 	}
 
 }
