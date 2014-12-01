@@ -71,5 +71,18 @@ public class ServiceDAO {
 
 	}
 	
+	
+	public List<Service> ListServicesByDay(String day) {
+		Session session = Connection.getSession();
+		Criteria criteria = session.createCriteria(Service.class);
+		
+		Criterion c1 = Restrictions.eq("created", day );
+		criteria.add(c1);
+
+		criteria.addOrder(Order.desc("id"));
+		return criteria.list();
+	}
+
+	
 }
 

@@ -37,7 +37,8 @@ public class ServiceController {
 
 	@Inject
 	public ServiceController(UserSession session, Result result,
-			VehicleDAO daoVehicle, ServiceDAO daoSevice, RegisterLog log, Validator validator) {
+			VehicleDAO daoVehicle, ServiceDAO daoSevice, RegisterLog log,
+			Validator validator) {
 		this.userSession = session;
 		this.result = result;
 		this.daoVehicle = daoVehicle;
@@ -80,8 +81,9 @@ public class ServiceController {
 
 		daoService.insert(service);
 		log.registrationLog(Operations.CREATE, MODEL);
-		
-		validator.add(new SimpleMessage("success", "Open service with success!!"));
+
+		validator.add(new SimpleMessage("success",
+				"Open service with success!!"));
 		validator.onErrorRedirectTo(IndexController.class).index();
 
 	}
@@ -98,7 +100,7 @@ public class ServiceController {
 	public void search(String licensePlate) {
 
 		if (daoVehicle.vehicleExists(licensePlate)) {
-			
+
 			log.registrationLog(Operations.READ, MODEL);
 			result.use(Results.json()).withoutRoot()
 					.from(daoVehicle.getVehicle(licensePlate)).serialize();
@@ -107,11 +109,16 @@ public class ServiceController {
 
 	}
 
+	@Get("byDay")
+	public void searchByDay(String day) {
+		result.use(Results.json()).withoutRoot()
+				.from(daoService.ListServicesByDay(day)).serialize();
+	}
+
 	@Get("checkout/{id}")
 	public void checkout(int id) {
 		if (daoService.serviceExist(id)) {
 
-			
 			log.registrationLog(Operations.UPDATE, MODEL);
 			Service checkOut = daoService.getService(id);
 			checkOut.setDateTimeOut(Calendar.getInstance());
@@ -129,7 +136,8 @@ public class ServiceController {
 			checkOut.setAmount(totalPrice);
 
 			daoService.update(checkOut);
-			validator.add(new SimpleMessage("success", "Closed service with success!"));
+			validator.add(new SimpleMessage("success",
+					"Closed service with success!"));
 			validator.onErrorRedirectTo(IndexController.class).index();
 		}
 	}
@@ -153,6 +161,5 @@ public class ServiceController {
 		return sdf.format(cal.getTime()).split(":");
 
 	}
-	
 
 }

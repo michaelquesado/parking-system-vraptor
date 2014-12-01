@@ -21,7 +21,7 @@
 				<jsp:include page="tab_list_services.jsp"></jsp:include>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="other">
-			
+				<jsp:include page="tab_list_old_services.jsp"></jsp:include>
 			</div>
 		</div>
 
