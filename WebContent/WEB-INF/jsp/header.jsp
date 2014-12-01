@@ -19,6 +19,8 @@
 	src="${pageContext.request.contextPath}/assets/js/modal.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/js/collapse.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/tab.js"></script>
 </head>
 <body>
 	<!-- NAV -->
@@ -81,7 +83,8 @@
 				</c:forEach>
 				
 				<c:if test="${message ne null}">
-						<div class="alert alert-${alert_type}" role="alert">
+						<div class="alert  alert-dismissable  alert-${alert_type}" role="alert">
+						 <button type="button" class="close" data-dismiss="alert">×</button>
 							${message}
 						</div>
 				</c:if>
