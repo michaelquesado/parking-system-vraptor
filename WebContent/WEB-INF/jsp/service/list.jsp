@@ -7,7 +7,7 @@
 <div class="row">
 	<div class="col-lg-12 col-md-12">
 		<div class="">
-			<h2>All services.</h2>
+			<h2>Services.</h2>
 		</div>
 		<ul class="nav nav-tabs" role="tablist" id="myTab">
 			<li role="presentation" class="active"><a href="#home"
@@ -21,7 +21,6 @@
 				<jsp:include page="tab_list_services.jsp"></jsp:include>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="other">
-			
 			</div>
 		</div>
 
