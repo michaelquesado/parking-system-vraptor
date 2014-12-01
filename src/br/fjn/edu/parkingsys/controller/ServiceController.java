@@ -11,6 +11,8 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.validator.SimpleMessage;
+import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
 import br.fjn.edu.parkingsys.components.RegisterLog;
 import br.fjn.edu.parkingsys.components.UserSession;
@@ -30,20 +32,22 @@ public class ServiceController {
 	private VehicleDAO daoVehicle;
 	private ServiceDAO daoService;
 	private RegisterLog log;
-	private static final String MODEL = "Service";
+	private Validator validator;
+	private final String MODEL = "Service";
 
 	@Inject
 	public ServiceController(UserSession session, Result result,
-			VehicleDAO daoVehicle, ServiceDAO daoSevice, RegisterLog log) {
+			VehicleDAO daoVehicle, ServiceDAO daoSevice, RegisterLog log, Validator validator) {
 		this.userSession = session;
 		this.result = result;
 		this.daoVehicle = daoVehicle;
 		this.daoService = daoSevice;
 		this.log = log;
+		this.validator = validator;
 	}
 
 	/**
-	 * @deprecated para o CDI
+	 * @deprecated for CDI
 	 */
 	ServiceController() {
 	}
@@ -77,8 +81,8 @@ public class ServiceController {
 		daoService.insert(service);
 		log.registrationLog(Operations.CREATE, MODEL);
 		
-
-		result.redirectTo(IndexController.class).index();
+		validator.add(new SimpleMessage("success", "Open service with success!!"));
+		validator.onErrorRedirectTo(IndexController.class).index();
 
 	}
 
@@ -94,7 +98,7 @@ public class ServiceController {
 	public void search(String licensePlate) {
 
 		if (daoVehicle.vehicleExists(licensePlate)) {
-
+			
 			log.registrationLog(Operations.READ, MODEL);
 			result.use(Results.json()).withoutRoot()
 					.from(daoVehicle.getVehicle(licensePlate)).serialize();
@@ -125,8 +129,8 @@ public class ServiceController {
 			checkOut.setAmount(totalPrice);
 
 			daoService.update(checkOut);
-
-			result.redirectTo(IndexController.class).index();
+			validator.add(new SimpleMessage("success", "Closed service with success!"));
+			validator.onErrorRedirectTo(IndexController.class).index();
 		}
 	}
 

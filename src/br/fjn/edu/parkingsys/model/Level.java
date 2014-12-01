@@ -1,7 +1,7 @@
 package br.fjn.edu.parkingsys.model;
 
 public enum Level {
-	EMPLOYEE("EMPREGADO"),MANAGER("GERENTE");
+	EMPLOYEE("EMPLOYEE"),MANAGER("MANAGER");
 	
 	public String level;
 	

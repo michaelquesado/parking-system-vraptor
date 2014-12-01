@@ -25,7 +25,7 @@ public class UserController {
 	private Validator validator;
 	private UserDAO dao;
 	private RegisterLog log;
-	private static final String MODEL = "User";
+	private final String MODEL = "User";
 	
 	@Inject
 	public UserController(UserSession userSession, Result result,
@@ -64,7 +64,9 @@ public class UserController {
 	public void delete(int id) {
 		log.registrationLog(Operations.DELETE, MODEL);
 		dao.delete(id);
-		result.redirectTo(this).listUsers();
+		validator.add(new SimpleMessage("warning", "User delete with sucess"));
+		validator.onErrorRedirectTo(this).listUsers();
+		
 
 	}
 
@@ -82,7 +84,8 @@ public class UserController {
 		} else {
 			log.registrationLog(Operations.CREATE, MODEL);
 			dao.insert(user);
-			result.redirectTo(this).listUsers();
+			validator.add(new SimpleMessage("success", "New User add with success!"));
+			validator.onErrorRedirectTo(this).listUsers();
 		}
 
 	}

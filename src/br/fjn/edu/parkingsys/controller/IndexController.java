@@ -22,12 +22,12 @@ public class IndexController {
 	private Result result;
 	@Inject
 	private RegisterLog log;
-	private static final String MODEL = "Index";
+
 	
 	@Get("/")
 	public void index() {
 		
-		log.registrationLog(Operations.READ, MODEL);
+		log.registrationLog(Operations.READ, "Service");
 		result.include("user", userSession.getUser());
 		result.include("services", daoService.ListServices());
 		result.of(ServiceController.class).list();

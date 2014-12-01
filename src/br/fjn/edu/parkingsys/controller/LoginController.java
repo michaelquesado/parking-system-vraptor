@@ -42,8 +42,7 @@ public class LoginController {
 			result.redirectTo(IndexController.class).index();
 
 		} else {
-			validator.add(new SimpleMessage("login",
-					"Usuário ou Senha inválidos!"));
+			validator.add(new SimpleMessage("danger", "User or pass invalid!"));
 			validator.onErrorRedirectTo(this).loginForm();
 		}
 

@@ -10,12 +10,17 @@ import br.fjn.edu.parkingsys.model.log.Log;
 
 public class RegisterLog {
 
-	@Inject
+	
 	private Log log;
-	@Inject
 	private LogDAO logDAO;
-	@Inject
 	private UserSession userSession;
+	
+	@Inject
+	public RegisterLog(Log log, LogDAO logDAO, UserSession userSession) {
+		this.log = log;
+		this.logDAO = logDAO;
+		this.userSession = userSession;
+	}
 
 	public void registrationLog(Operations operations, String model) {
 

@@ -44,8 +44,8 @@
 						<li><a href="#">Contact</a></li>
 						<li><a href="#">About</a></li>
 					</ul>
-
-					<c:if test="${user != null }">
+					
+					<c:if test="${user.name ne null }">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown"><a class="dropdown-toggle"
 								data-toggle="dropdown" href="#" aria-expanded="true">
@@ -69,5 +69,21 @@
 	</nav>
 	<div class="container">
 		<div class="row " id="message-system">
-			<div class="col-md-12"></div>
+			<div class="col-md-6 col-md-offset-3">
+			
+				<c:set var="alert_type" value=""></c:set>
+				<c:set var="message" value=""></c:set>
+				
+				<c:forEach var="error" items="${errors}">
+					<c:set var="message" value="${error.message}"></c:set>
+					<c:set var="alert_type" value="${error.category}"></c:set>
+					
+				</c:forEach>
+				
+				<c:if test="${message ne null}">
+						<div class="alert alert-${alert_type}" role="alert">
+							${message}
+						</div>
+				</c:if>
+			</div>
 		</div>
