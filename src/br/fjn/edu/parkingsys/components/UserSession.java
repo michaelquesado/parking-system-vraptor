@@ -7,6 +7,7 @@ import javax.inject.Named;
 
 import br.fjn.edu.parkingsys.model.User;
 
+
 @SessionScoped
 @Named("sessionUser")
 public class UserSession implements Serializable {

@@ -12,15 +12,14 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
+import br.fjn.edu.parkingsys.components.RegisterLog;
 import br.fjn.edu.parkingsys.components.UserSession;
 import br.fjn.edu.parkingsys.dao.ServiceDAO;
 import br.fjn.edu.parkingsys.dao.VehicleDAO;
-import br.fjn.edu.parkingsys.dao.log.LogDAO;
 import br.fjn.edu.parkingsys.model.Operations;
 import br.fjn.edu.parkingsys.model.Service;
 import br.fjn.edu.parkingsys.model.User;
 import br.fjn.edu.parkingsys.model.Vehicle;
-import br.fjn.edu.parkingsys.model.log.Log;
 
 @Controller
 @Path("service")
@@ -30,18 +29,17 @@ public class ServiceController {
 	private Result result;
 	private VehicleDAO daoVehicle;
 	private ServiceDAO daoService;
-	private Log log;
-	private LogDAO logDAO;
+	private RegisterLog log;
+	private static final String MODEL = "Service";
 
 	@Inject
 	public ServiceController(UserSession session, Result result,
-			VehicleDAO daoVehicle, ServiceDAO daoSevice, Log log, LogDAO logDAO) {
+			VehicleDAO daoVehicle, ServiceDAO daoSevice, RegisterLog log) {
 		this.userSession = session;
 		this.result = result;
 		this.daoVehicle = daoVehicle;
 		this.daoService = daoSevice;
 		this.log = log;
-		this.logDAO = logDAO;
 	}
 
 	/**
@@ -77,7 +75,7 @@ public class ServiceController {
 		service.setDateTimeEntry(Calendar.getInstance());
 
 		daoService.insert(service);
-		this.registerLog(Operations.CREATE);
+		log.registrationLog(Operations.CREATE, MODEL);
 		
 
 		result.redirectTo(IndexController.class).index();
@@ -87,7 +85,7 @@ public class ServiceController {
 	@Get("services")
 	public void list() {
 
-		this.registerLog(Operations.READY);
+		log.registrationLog(Operations.READ, MODEL);
 		result.include("user", userSession.getUser());
 		result.include("services", daoService.ListServices());
 	}
@@ -97,7 +95,7 @@ public class ServiceController {
 
 		if (daoVehicle.vehicleExists(licensePlate)) {
 
-			this.registerLog(Operations.READY);
+			log.registrationLog(Operations.READ, MODEL);
 			result.use(Results.json()).withoutRoot()
 					.from(daoVehicle.getVehicle(licensePlate)).serialize();
 
@@ -110,7 +108,7 @@ public class ServiceController {
 		if (daoService.serviceExist(id)) {
 
 			
-			this.registerLog(Operations.UPDATE);
+			log.registrationLog(Operations.UPDATE, MODEL);
 			Service checkOut = daoService.getService(id);
 			checkOut.setDateTimeOut(Calendar.getInstance());
 
@@ -152,14 +150,5 @@ public class ServiceController {
 
 	}
 	
-	private void registerLog(Operations operations){
-		
-		log.setUser_id(userSession.getUser().getId());
-		log.setModel("Service");
-		log.setOperation(operations);
-		log.setCreated(Calendar.getInstance());
-		
-		logDAO.register(log);
-	}
 
 }
