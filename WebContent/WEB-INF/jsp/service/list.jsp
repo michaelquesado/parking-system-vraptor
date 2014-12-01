@@ -11,9 +11,9 @@
 		</div>
 		<ul class="nav nav-tabs" role="tablist" id="myTab">
 			<li role="presentation" class="active"><a href="#home"
-				aria-controls="home" role="tab" data-toggle="tab">All services</a></li>
+				aria-controls="home" role="tab" data-toggle="tab">Today Services</a></li>
 			<li role="presentation"><a href="#other"
-				aria-controls="profile" role="tab" data-toggle="tab">Other services</a></li>
+				aria-controls="profile" role="tab" data-toggle="tab">All services</a></li>
 		</ul>
 
 		<div class="tab-content">
