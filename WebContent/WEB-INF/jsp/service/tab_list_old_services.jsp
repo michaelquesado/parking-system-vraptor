@@ -2,26 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <div class="row">
 	<div class="col-md-6">
-		<input type="date" class="form-control" id="data_passada" />
+		<form method="get" action="${linkTo[ServiceController].busca}">
+			<input type="date" class="form-control" name="day" id="data_passada" />
+			<input type="submit" value="Buscar" class="btn btn">
+		</form>
 	</div>
 </div>
-<script>
-	$("#data_passada").blur(function(){
-				$.ajax({
-					type : 'GET',
-					data : {
-						day : $(this).val()
-					},
-					url : "service/byDay",
-					dataType : 'text',
-					success : function(result) {
-						if (result !== null)
-							console.log(result);
-					},
-					error : function() {
-						console.log("nada_retornado");
-						
-					},
-				});
-	});
-</script>
+<jsp:include page="tab_list_services.jsp"></jsp:include>
+
+
+
+

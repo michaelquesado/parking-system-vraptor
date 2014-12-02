@@ -108,12 +108,16 @@ public class ServiceController {
 		}
 
 	}
-
-	@Get("byDay")
-	public void searchByDay(String day) {
-		result.use(Results.json()).withoutRoot()
-				.from(daoService.ListServicesByDay(day)).serialize();
+	
+	@Get("busca")
+	public void busca(String day) {
+		
+			log.registrationLog(Operations.READ, MODEL);
+			result.include("services", daoService.ListServicesByDay(day));
+			result.of(this).list();
 	}
+	
+	
 
 	@Get("checkout/{id}")
 	public void checkout(int id) {
